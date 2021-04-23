@@ -12,7 +12,7 @@ void main() {
   //View Routing
   runApp(
     MaterialApp(
-      initialRoute: '/modulePayment',
+      initialRoute: '/login',
       routes: {
         '/login': (context) => Login(),
         '/modulePayment': (context) => ModulePayment(),

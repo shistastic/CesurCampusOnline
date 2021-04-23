@@ -1,14 +1,15 @@
+import 'package:cesurcampusonline/screens/module_payment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
-// import 'dashboard_screen.dart';
 
 const users = const {
-  'dribbble@gmail.com': '12345',
-  'hunter@gmail.com': 'hunter',
+  'admin@admin.com': 'admin',
+  'alejandro@alejandro.com': 'tenpiedad',
 };
 
 class Login extends StatelessWidget {
   Duration get loginTime => Duration(milliseconds: 2250);
+
 
   Future<String> _authUser(LoginData data) {
     print('Name: ${data.name}, Password: ${data.password}');
@@ -19,7 +20,7 @@ class Login extends StatelessWidget {
       if (users[data.name] != data.password) {
         return 'Password does not match';
       }
-      return 'It Works2';
+      return 'funciona';
     });
   }
 
@@ -39,9 +40,10 @@ class Login extends StatelessWidget {
       logo: 'assets/images/Cesur - Complete Logo.png',
       onLogin: _authUser,
       onSignup: _authUser,
+      loginAfterSignUp: true,
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => Login(),
+          builder: (context) => ModulePayment(),
         ));
       },
       onRecoverPassword: _recoverPassword,

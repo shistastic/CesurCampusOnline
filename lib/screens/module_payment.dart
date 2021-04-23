@@ -9,6 +9,12 @@ class ModulePayment extends StatefulWidget {
 
 class _ModulePaymentState extends State<ModulePayment> {
 
+  int selectedYear = 0;
+  int selectedCourse = 0;
+  int selectedModal = 0;
+
+  double total = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,67 +39,190 @@ class _ModulePaymentState extends State<ModulePayment> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Curso'),
-                      ElevatedButton(
-                          onPressed: () {
-
-                            }, child: Text('Primero'),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 7),
+                        child: Text('Curso',
+                        style: TextStyle(
+                          color:  Color(0xff2f30a1),
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold
                           ),
-                      ElevatedButton(
-                        onPressed: () {
-
-                        }, child: Text('Segundo'),
+                        ),
+                      ),
+                      Container(
+                        width: double.maxFinite,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(selectedYear == 1 ?
+                            Colors.redAccent : Color(0xff256be6)),
+                          ),
+                            onPressed: () {
+                              setState(() {
+                                selectedYear = 1;
+                              });
+                              }, child: Text('Primero'),
+                            ),
+                      ),
+                      Container(
+                        width: double.maxFinite,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(selectedYear == 2 ?
+                            Colors.redAccent : Color(0xff256be6) ),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              selectedYear = 2;
+                            });
+                          }, child: Text('Segundo'),
+                        ),
                       ),
                       SizedBox(height: 15,),
-
-                      Text('Grado'),
-                      ElevatedButton(
-                        onPressed: () {
-
-                        }, child: Text('Desarrollo de Aplicaciones Multiplataforma'),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 7),
+                        child: Text('Grado',
+                          style: TextStyle(
+                              color:  Color(0xff2f30a1),
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-
-                        }, child: Text('Desarrollo de Aplicaciones Web'),
+                      Container(
+                        width: double.maxFinite,
+                        height: 50,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(selectedCourse == 1 ?
+                            Colors.redAccent : Color(0xff256be6) ),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              selectedCourse = 1;
+                            });
+                          }, child: Text('Desarrollo de Aplicaciones Multiplataforma',
+                            style: TextStyle(
+                            ),
+                          textAlign: TextAlign.center,
+                          ),
+                        ),
                       ),
-                      SizedBox(height: 15,),
-                      Text('Modalidad'),
-                      ElevatedButton(
-                        onPressed: () {
-
-                        }, child: Text('Presencial'),
+                      SizedBox(height: 13,),
+                      Container(
+                        width: double.maxFinite,
+                        height: 50,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(selectedCourse == 2 ?
+                            Colors.redAccent : Color(0xff256be6) ),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              selectedCourse = 2;
+                            });
+                          }, child: Text('Desarrollo de Aplicaciones Web',
+                          textAlign: TextAlign.center,
+                          ),
+                        ),
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-
-                        }, child: Text('Online/A Distancia'),
+                      SizedBox(height: 20,),
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 7),
+                        child: Text('Modalidad',
+                          style: TextStyle(
+                              color:  Color(0xff2f30a1),
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
                       ),
+                      Container(
+                        width: double.maxFinite,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(selectedModal == 1 ?
+                            Colors.redAccent : Color(0xff256be6) ),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              selectedModal = 1;
+                            });
+                          },
+                          child: Text('Presencial',
+                          textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: double.maxFinite,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(selectedModal == 2 ?
+                            Colors.redAccent : Color(0xff256be6) ),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              selectedModal = 2;
+                            });
+                          },
+                          child: Text('Online/A Distancia',
+                          textAlign: TextAlign.center,),
+                        ),
+                      ),
+                      selectedModal != 0 && selectedCourse != 0 && selectedYear != 0 ?
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                         child: Container(
                           height: 50,
                           color: Colors.white,
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('A Pagar:'),
-                              Text('1.490,00€')
+                              Text('A Pagar:',
+                              style: TextStyle(
+                                color: Color(0xff2f30a1),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18
+                                ),
+                              ),
+                              SizedBox(width: 10,),
+                              Text('1.490,00€',
+                                style: TextStyle(
+                                    fontSize: 16
+                                ),
+                              ),
                             ],
                           ),
                         ),
-                      ),
+                      ) : SizedBox(height: 15,),
                       Divider(
                         color: Colors.white,
                         thickness: 3,
                       ),
                       SizedBox(height: 15,),
-                      Text('Métodos De Pago'),
+                      Text('Métodos De Pago',
+                        style: TextStyle(
+                            color:  Color(0xff2f30a1),
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
                       SizedBox(height: 15,),
                       Container(
-                        color: Color(0xffffffff),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
                         child: ExpansionTile(
-                          title: Text('Tarjeta De Crédito'),
+                          title: Text('Tarjeta De Crédito',
+                          style: TextStyle(
+                            color: Color(0xff2f30a1),
+                            fontWeight: FontWeight.bold
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                           children: [
                             SizedBox(height: 10,),
                             Container(
@@ -114,7 +243,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                                     decoration: InputDecoration(
                                       focusedBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Color(0xfffca3ce),
+                                          color: Colors.lightBlue,
                                           width: 1.5,
                                         ),
                                         borderRadius: BorderRadius.all(
@@ -123,7 +252,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                                       ),
                                       enabledBorder: OutlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Colors.transparent,
+                                          color: Colors.lightBlue,
                                           width: 2.0,
                                         ),
                                         borderRadius: BorderRadius.all(
@@ -137,7 +266,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                                       isDense: true,
                                       hintText: 'Número Tarjeta',
                                       prefixIcon: Icon(Icons.credit_card,
-                                        color: Color(0xfffca3ce),
+                                        color: Colors.lightBlue,
                                       ),
                                     ),
                                   ),
@@ -160,7 +289,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                                       decoration: InputDecoration(
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0xfffca3ce),
+                                            color: Colors.lightBlue,
                                             width: 1.5,
                                           ),
                                           borderRadius: BorderRadius.all(
@@ -169,7 +298,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                                         ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Colors.transparent,
+                                            color: Colors.lightBlue,
                                             width: 2.0,
                                           ),
                                           borderRadius: BorderRadius.all(
@@ -183,7 +312,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                                         isDense: true,
                                         hintText: 'CVV',
                                         prefixIcon: Icon(Icons.code,
-                                          color: Color(0xfffca3ce),
+                                          color: Colors.lightBlue,
                                         ),
                                       ),
                                       // controller: this.controller,
@@ -210,7 +339,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                                       decoration: InputDecoration(
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Color(0xfffca3ce),
+                                            color: Colors.lightBlue,
                                             width: 1.5,
                                           ),
                                           borderRadius: BorderRadius.all(
@@ -219,7 +348,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                                         ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Colors.transparent,
+                                            color: Colors.lightBlue,
                                             width: 2.0,
                                           ),
                                           borderRadius: BorderRadius.all(
@@ -233,9 +362,8 @@ class _ModulePaymentState extends State<ModulePayment> {
                                         isDense: true,
                                         hintText: 'Fecha Caducidad',
                                         prefixIcon: Icon(Icons.date_range,
-                                          color: Color(0xfffca3ce),
+                                          color: Colors.lightBlue,
                                         ),
-
                                       ),
                                       keyboardType:
                                       TextInputType.numberWithOptions(signed: false, decimal: false),
@@ -290,23 +418,22 @@ class _ModulePaymentState extends State<ModulePayment> {
                               ),
                             ),
                             SizedBox(height: 10,),
-                            Text('Total: '
-                                // '$total€'
-                              ,
+                            selectedModal != 0 && selectedCourse != 0 && selectedYear != 0 ?
+                            Text('Total: $total€',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ),
                               textAlign: TextAlign.center,
-                            ),
+                            ) : SizedBox(height: 10,),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(0, 13.0, 0, 7.0),
                               child: Center(
                                 child: ElevatedButton(
                                   style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all(true ?
-                                    Color(0xff949494) : Color(0xfffca3ce)),
+                                    Color(0xff256be6) : Color(0xfffca3ce)),
                                   ),
                                   onPressed: () async => print('dasf'),
                                   child: Text(
