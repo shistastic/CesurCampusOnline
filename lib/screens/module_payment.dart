@@ -294,14 +294,14 @@ class _ModulePaymentState extends State<ModulePayment> {
                                 // '$total€'
                               ,
                               style: TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ),
                               textAlign: TextAlign.center,
                             ),
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 13.0, 0, 0.0),
+                              padding: const EdgeInsets.fromLTRB(0, 13.0, 0, 7.0),
                               child: Center(
                                 child: ElevatedButton(
                                   style: ButtonStyle(
@@ -309,9 +309,8 @@ class _ModulePaymentState extends State<ModulePayment> {
                                     Color(0xff949494) : Color(0xfffca3ce)),
                                   ),
                                   onPressed: () async => print('dasf'),
-
                                   child: Text(
-                                    true ? 'Procesando...' : 'Pagar con Tarjeta',
+                                    false ? 'Procesando...' : 'Pagar con Tarjeta',
                                     style: TextStyle(
                                       color: Colors.white,
                                       letterSpacing: 1.2,
