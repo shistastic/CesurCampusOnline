@@ -426,16 +426,18 @@ class _ModulePaymentState extends State<ModulePayment> {
                                 fontWeight: FontWeight.bold,
                               ),
                               textAlign: TextAlign.center,
-                            ) : SizedBox(height: 10,),
+                            ) : SizedBox(height: 0,),
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 13.0, 0, 7.0),
+                              padding: const EdgeInsets.fromLTRB(0, 0.0, 0, 7.0),
                               child: Center(
                                 child: ElevatedButton(
                                   style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all(true ?
                                     Color(0xff256be6) : Color(0xfffca3ce)),
                                   ),
-                                  onPressed: () async => print('dasf'),
+                                  onPressed: () async {
+                                    Navigator.pushReplacementNamed(context, '/studentHome');
+                                  },
                                   child: Text(
                                     false ? 'Procesando...' : 'Pagar con Tarjeta',
                                     style: TextStyle(

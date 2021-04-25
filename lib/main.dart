@@ -1,4 +1,5 @@
 import 'package:cesurcampusonline/screens/register.dart';
+import 'package:cesurcampusonline/screens/student_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -13,11 +14,12 @@ void main() {
   //View Routing
   runApp(
     MaterialApp(
-      initialRoute: '/login',
+      initialRoute: '/studentHome',
       routes: {
         '/login': (context) => Login(),
         '/register': (context) => Register(),
         '/modulePayment': (context) => ModulePayment(),
+        '/studentHome': (context) => StudentHome(),
       },
 
     ),

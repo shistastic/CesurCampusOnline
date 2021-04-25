@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CampusAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final Color backgroundColor = Colors.white;
+  final Color backgroundColor = Color(0xff17267a);
   final Text? title;
   final AppBar appbar = AppBar();
   final List<Widget>? actions;
@@ -12,11 +12,16 @@ class CampusAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      iconTheme: IconThemeData(color: Colors.black),
+      iconTheme: IconThemeData(color: Colors.white),
       centerTitle: true,
-      title: Image.asset(
-        'assets/images/logo-koolnova-sin-fondo.png',
-        height: this.appbar.preferredSize.height - 10,
+      // title: Image.asset(
+      //   'assets/images/Cesur-CompleteLogo.png',
+      //   height: this.appbar.preferredSize.height +10,
+      // ),
+      title: Text('Cesur Formación',
+        style: TextStyle(
+          color: Colors.white,
+        ),
       ),
       backgroundColor: backgroundColor,
       actions: actions,
