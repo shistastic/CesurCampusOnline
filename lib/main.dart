@@ -1,3 +1,4 @@
+import 'package:cesurcampusonline/screens/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -15,6 +16,7 @@ void main() {
       initialRoute: '/login',
       routes: {
         '/login': (context) => Login(),
+        '/register': (context) => Register(),
         '/modulePayment': (context) => ModulePayment(),
       },
 

@@ -1,6 +1,5 @@
 import 'package:cesurcampusonline/screens/module_payment.dart';
 import 'package:cesurcampusonline/widgets/appBar.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -10,13 +9,13 @@ import 'package:url_launcher/url_launcher.dart';
 //   'alejandro@alejandro.com': 'tenpiedad',
 // };
 
-class Login extends StatefulWidget {
+class Register extends StatefulWidget {
 
   @override
-  _LoginState createState() => _LoginState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
+class _RegisterState extends State<Register> {
   @override
   Widget _buildBody(){
     return Container(
@@ -120,6 +119,41 @@ class _LoginState extends State<Login> {
                         filled: true,
                         contentPadding: EdgeInsets.only(top: 20),
                         isDense: true,
+                        hintText: 'Nombre Completo',
+                        prefixIcon: Icon(Icons.account_circle,
+                          color:  Color(0xff2f30a1),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 25,),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 40),
+                    child: TextFormField(
+
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color:  Color(0xff2f30a1),
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(0),
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 2.0,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(0),
+                          ),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true,
+                        contentPadding: EdgeInsets.only(top: 20),
+                        isDense: true,
                         hintText: 'Contraseña',
                         prefixIcon: Icon(Icons.account_circle,
                           color:  Color(0xff2f30a1),
@@ -139,11 +173,11 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           onPressed: ()  async {
-                            Navigator.pushReplacementNamed(context, '/modulePayment');
+                            Navigator.pushReplacementNamed(context, '/login');
 
                           },
                           child: Text(
-                            'Iniciar Sesión',
+                            'Registro',
                             style: TextStyle(
                               color: Colors.white,
                               letterSpacing: 1.2,
@@ -159,7 +193,7 @@ class _LoginState extends State<Login> {
                     padding: EdgeInsets.fromLTRB(45, 20.0, 0, 20.0),
                     child: Row(
                       children: <Widget>[
-                        Text('¿No tiene cuenta?',
+                        Text('¿Ya tiene cuenta?',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 15.5,
@@ -169,14 +203,11 @@ class _LoginState extends State<Login> {
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                  text: ' Regístrese.',
-                                  style: TextStyle(
-                                    color: Color(0xff2fbdec),
-                                    fontSize: 16.0,
-                                  ),
-                                  recognizer: TapGestureRecognizer()..onTap = () {
-                                    Navigator.popAndPushNamed(context, '/register');
-                                  }
+                                text: ' Inicie Sesión.',
+                                style: TextStyle(
+                                  color: Color(0xff2fbdec),
+                                  fontSize: 16.0,
+                                ),
                               ),
                             ],
                           ),
@@ -184,21 +215,7 @@ class _LoginState extends State<Login> {
                       ],
                     ),
                   ),
-                  RichText(
-                    text: new TextSpan(
-                      children: [
-                        new TextSpan(
-                            text: '¿Ha olvidado su contraseña?',
-                            style: TextStyle(
-                              color: Color(0xff2fbdec),
-                              fontSize: 16.0,
-                            ),
-
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 30,)
+                  SizedBox(height: 20,)
                 ],
               ),
             ),
