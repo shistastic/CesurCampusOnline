@@ -1,3 +1,4 @@
+import 'package:cesurcampusonline/data/constants.dart';
 import 'package:cesurcampusonline/screens/module_payment.dart';
 import 'package:cesurcampusonline/widgets/appBar.dart';
 import 'package:flutter/gestures.dart';
@@ -19,251 +20,252 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   @override
   Widget _buildBody(){
-    return Container(
-      color: Colors.white,
-      child: ListView(
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 65, horizontal: 50),
-            child: Container(
-                child: Image.asset('assets/images/Cesur - Complete Logo.png')
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 40),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Color(0xffd7e1fa).withOpacity(0.7),
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                    color: Color(0xffd7e1fa),
-                    blurRadius: 10.0,
-                    offset: Offset(1.0, 1.0),
-                  ),
-                ],
-                borderRadius: BorderRadius.all(
-                  Radius.circular(5),
-                ),
-              ),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 30),
-                    child: Text('ACCESO AL AULA VIRTUAL',
-                      style: TextStyle(
-                          color:  Color(0xff2f30a1),
-                          fontSize: 19,
-                          fontWeight: FontWeight.bold
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 40),
-                    child: TextFormField(
-
-                      decoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color:  Color(0xff2f30a1),
-                            width: 1.5,
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(0),
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(0),
-                          ),
-                        ),
-                        fillColor: Colors.white,
-                        filled: true,
-                        contentPadding: EdgeInsets.only(top: 20),
-                        isDense: true,
-                        hintText: 'Email',
-                        prefixIcon: Icon(Icons.account_circle,
-                          color:  Color(0xff2f30a1),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 25,),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 40),
-                    child: TextFormField(
-
-                      decoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color:  Color(0xff2f30a1),
-                            width: 1.5,
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(0),
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(0),
-                          ),
-                        ),
-                        fillColor: Colors.white,
-                        filled: true,
-                        contentPadding: EdgeInsets.only(top: 20),
-                        isDense: true,
-                        hintText: 'Contraseña',
-                        prefixIcon: Icon(Icons.account_circle,
-                          color:  Color(0xff2f30a1),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 25.0, 10, 0.0),
-                    child: Center(
-                      child: Container(
-                        width: 215,
-                        height: 40,
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(Color(0xff2f30a1),
-                            ),
-                          ),
-                          onPressed: ()  async {
-                            Navigator.pushReplacementNamed(context, '/modulePayment');
-
-                          },
-                          child: Text(
-                            'Iniciar Sesión',
-                            style: TextStyle(
-                              color: Colors.white,
-                              letterSpacing: 1.2,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(45, 20.0, 0, 20.0),
-                    child: Row(
-                      children: <Widget>[
-                        Text('¿No tiene cuenta?',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 15.5,
-                          ),
-                        ),
-                        RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                  text: ' Regístrese.',
-                                  style: TextStyle(
-                                    color: Color(0xff2fbdec),
-                                    fontSize: 16.0,
-                                  ),
-                                  recognizer: TapGestureRecognizer()..onTap = () {
-                                    Navigator.popAndPushNamed(context, '/register');
-                                  }
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  RichText(
-                    text: new TextSpan(
-                      children: [
-                        new TextSpan(
-                            text: '¿Ha olvidado su contraseña?',
-                            style: TextStyle(
-                              color: Color(0xff2fbdec),
-                              fontSize: 16.0,
-                            ),
-
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 30,)
-                ],
+    return SafeArea(
+      child: Container(
+        color: Colors.white,
+        child: ListView(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 65, horizontal: 50),
+              child: Container(
+                  child: Image.asset('assets/images/Cesur - Complete Logo.png')
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 50, horizontal: 50),
-            child: GestureDetector(
-              onTap: () async {
-                await canLaunch('https://campusonline.cesurformacion.com/upload/ManualdeUsuario.pdf');
-
-              },
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 40),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.7),
+                  color: CustomColors.bgLightBlue.withOpacity(0.7),
                   boxShadow: <BoxShadow>[
                     BoxShadow(
-                      color: Colors.white70,
+                      color: CustomColors.bgLightBlue,
                       blurRadius: 10.0,
                       offset: Offset(1.0, 1.0),
                     ),
                   ],
-                  border: Border.all(
-                    color: Colors.grey,
-                  ),
                   borderRadius: BorderRadius.all(
                     Radius.circular(5),
                   ),
                 ),
-                child: Center(
-                  child: Column(
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10, horizontal:95),
-                          child: Image.asset('assets/images/Manual de Uso.png')
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 30),
+                      child: Text('ACCESO AL AULA VIRTUAL',
+                        style: TextStyle(
+                            color: CustomColors.darkBlue,
+                            fontSize: 19,
+                            fontWeight: FontWeight.bold
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20),
-                        child: Text('MANUAL DE USO',
-                          style: TextStyle(
-                              color:  Color(0xff2f30a1),
-                              fontSize: 19,
-                              fontWeight: FontWeight.bold
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 40),
+                      child: TextFormField(
+
+                        decoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color:  CustomColors.darkBlue,
+                              width: 1.5,
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(0),
+                            ),
                           ),
-                          textAlign: TextAlign.center,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(0),
+                            ),
+                          ),
+                          fillColor: Colors.white,
+                          filled: true,
+                          contentPadding: EdgeInsets.only(top: 20),
+                          isDense: true,
+                          hintText: 'Email',
+                          prefixIcon: Icon(Icons.account_circle,
+                            color:  CustomColors.darkBlue,
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical:3, horizontal: 20),
-                        child: Text('Si tienes dudas sobre el funcionamiento de la plataforma puedes pinchar aquí.',
-                          style: TextStyle(
-                              color:  Color(0xff4d4d4f),
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold
+                    ),
+                    SizedBox(height: 25,),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 40),
+                      child: TextFormField(
+
+                        decoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color:  CustomColors.darkBlue,
+                              width: 1.5,
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(0),
+                            ),
                           ),
-                          textAlign: TextAlign.center,
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.transparent,
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(0),
+                            ),
+                          ),
+                          fillColor: Colors.white,
+                          filled: true,
+                          contentPadding: EdgeInsets.only(top: 20),
+                          isDense: true,
+                          hintText: 'Contraseña',
+                          prefixIcon: Icon(Icons.account_circle,
+                            color:  CustomColors.darkBlue,
+                          ),
                         ),
                       ),
-                      SizedBox(height: 15,),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 25.0, 10, 0.0),
+                      child: Center(
+                        child: Container(
+                          width: 215,
+                          height: 40,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(CustomColors.darkBlue,
+                              ),
+                            ),
+                            onPressed: ()  async {
+                              Navigator.pushReplacementNamed(context, '/modulePayment');
+
+                            },
+                            child: Text(
+                              'Iniciar Sesión',
+                              style: TextStyle(
+                                color: Colors.white,
+                                letterSpacing: 1.2,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(45, 20.0, 0, 20.0),
+                      child: Row(
+                        children: <Widget>[
+                          Text('¿No tiene cuenta?',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15.5,
+                            ),
+                          ),
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                    text: ' Regístrese.',
+                                    style: TextStyle(
+                                      color: CustomColors.textLightBlue,
+                                      fontSize: 16.0,
+                                    ),
+                                    recognizer: TapGestureRecognizer()..onTap = () {
+                                      Navigator.popAndPushNamed(context, '/register');
+                                    }
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    RichText(
+                      text: new TextSpan(
+                        children: [
+                          new TextSpan(
+                              text: '¿Ha olvidado su contraseña?',
+                              style: TextStyle(
+                                color: CustomColors.textLightBlue,
+                                fontSize: 16.0,
+                              ),
+
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 30,)
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 50, horizontal: 50),
+              child: GestureDetector(
+                onTap: () async {
+                  await canLaunch('https://campusonline.cesurformacion.com/upload/ManualdeUsuario.pdf');
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.7),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        color: Colors.white70,
+                        blurRadius: 10.0,
+                        offset: Offset(1.0, 1.0),
+                      ),
                     ],
+                    border: Border.all(
+                      color: Colors.grey,
+                    ),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5),
+                    ),
+                  ),
+                  child: Center(
+                    child: Column(
+                      children: [
+                        Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10, horizontal:95),
+                            child: Image.asset('assets/images/Manual de Uso.png')
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 20),
+                          child: Text('MANUAL DE USO',
+                            style: TextStyle(
+                                color:  CustomColors.darkBlue,
+                                fontSize: 19,
+                                fontWeight: FontWeight.bold
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical:3, horizontal: 20),
+                          child: Text('Si tienes dudas sobre el funcionamiento de la plataforma puedes pinchar aquí.',
+                            style: TextStyle(
+                                color:  CustomColors.darkGrey,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        SizedBox(height: 15,),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -271,7 +273,6 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: CampusAppBar(),
       body: _buildBody(),
     );
   }

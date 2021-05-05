@@ -1,3 +1,4 @@
+import 'package:cesurcampusonline/data/constants.dart';
 import 'package:cesurcampusonline/screens/module_payment.dart';
 import 'package:cesurcampusonline/widgets/appBar.dart';
 import 'package:cesurcampusonline/widgets/campus_drawer.dart';
@@ -34,10 +35,10 @@ class _StudentHomeState extends State<StudentHome> {
             padding: EdgeInsets.symmetric(horizontal: 40),
             child: Container(
               decoration: BoxDecoration(
-                color: Color(0xffd7e1fa).withOpacity(0.7),
+                color: CustomColors.almostWhite.withOpacity(0.7),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    color: Color(0xffd7e1fa),
+                    color: CustomColors.almostWhite,
                     blurRadius: 10.0,
                     offset: Offset(1.0, 1.0),
                   ),
@@ -58,14 +59,101 @@ class _StudentHomeState extends State<StudentHome> {
                         ),
                       ),
                       child: ExpansionTile(
-                        title: Text('Tarjeta De Crédito',
+                        title: Text('Tareas Pendientes',
                           style: TextStyle(
-                              color: Color(0xff2f30a1),
+                              color: CustomColors.darkBlue,
                               fontWeight: FontWeight.bold
                           ),
                           textAlign: TextAlign.center,
                         ),
                         children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                    color: Colors.white60,
+                                    blurRadius: 10.0,
+                                    offset: Offset(1.0, 1.0),
+                                  ),
+                                ],
+                                border: Border.all(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 10),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text('Unidad 1 Tarea 1',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 17,
+                                          ),
+                                        ),
+                                        Icon(Icons.circle,
+                                        color: Colors.green,),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+                                    child: Divider(thickness: 3,
+                                    color: CustomColors.barsDarkBlue,),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Text('Asignatura: ',
+                                        style: TextStyle(
+                                            color: CustomColors.darkBlue,
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                      ),
+                                      Text('Bases De Datos',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 17,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(10, 15.0, 10, 10.0),
+                                    child: Center(
+                                      child: Container(
+                                        width: 160,
+                                        height: 40,
+                                        child: ElevatedButton(
+                                          style: ButtonStyle(
+                                            backgroundColor: MaterialStateProperty.all(CustomColors.darkBlue,
+                                            ),
+                                          ),
+                                          onPressed: ()  async {
+
+                                          },
+                                          child: Text(
+                                            'Ver Tarea',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              letterSpacing: 1.2,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16.0,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
                             child: Container(
@@ -83,36 +171,155 @@ class _StudentHomeState extends State<StudentHome> {
                               ),
                               child: Column(
                                 children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Text('Unidad 1 Tarea 1',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 17,
-                                      ),),
-                                      Icon(Icons.circle,
-                                      color: Colors.green,),
-                                    ],
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 10),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text('Unidad 1 Tarea 2',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 17,
+                                          ),),
+                                        Icon(Icons.circle,
+                                          color: Colors.green,),
+                                      ],
+                                    ),
                                   ),
                                   Padding(
                                     padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
                                     child: Divider(thickness: 3,
-                                    color: Color(0xff17267a),),
+                                      color: CustomColors.darkBlue,),
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Text('Unidad 1 Tarea 1',
+                                      Text('Asignatura: ',
+                                        style: TextStyle(
+                                            color: CustomColors.darkBlue,
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                      ),
+                                      Text('Sistemas\nInformáticos',
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 17,
-                                        ),),
-                                      Icon(Icons.circle,
-                                        color: Colors.green,),
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
                                     ],
                                   ),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(10, 15.0, 10, 10.0),
+                                    child: Center(
+                                      child: Container(
+                                        width: 160,
+                                        height: 40,
+                                        child: ElevatedButton(
+                                          style: ButtonStyle(
+                                            backgroundColor: MaterialStateProperty.all(CustomColors.darkBlue,
+                                            ),
+                                          ),
+                                          onPressed: ()  async {
+
+                                          },
+                                          child: Text(
+                                            'Ver Tarea',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              letterSpacing: 1.2,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16.0,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                      child: ExpansionTile(
+                        title: Text('Asignaturas',
+                          style: TextStyle(
+                              color: CustomColors.darkBlue,
+                              fontWeight: FontWeight.bold
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                            child: Container(
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                    color: Colors.white60,
+                                    blurRadius: 10.0,
+                                    offset: Offset(1.0, 1.0),
+                                  ),
+                                ],
+                                border: Border.all(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(vertical: 15),
+                                child: Column(
+                                  children: [
+                                    Text('Bases De Datos',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17,
+                                      ),),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                            child: Container(
+                              width: double.maxFinite,
+                              decoration: BoxDecoration(
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                    color: Colors.white60,
+                                    blurRadius: 10.0,
+                                    offset: Offset(1.0, 1.0),
+                                  ),
+                                ],
+                                border: Border.all(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(vertical: 15),
+                                child: Column(
+                                  children: [
+                                    Text('Sistemas Informáticos',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17,
+                                      ),),
+                                  ],
+                                ),
                               ),
                             ),
                           ),

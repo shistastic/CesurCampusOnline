@@ -1,3 +1,4 @@
+import 'package:cesurcampusonline/data/constants.dart';
 import 'package:cesurcampusonline/widgets/appBar.dart';
 import 'package:flutter/material.dart';
 // import 'package:stripe_payment/stripe_payment.dart';
@@ -33,7 +34,7 @@ class _ModulePaymentState extends State<ModulePayment> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               child: Container(
-                color: Color(0xffd7e1fa),
+                color: CustomColors.almostWhite,
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                   child: Column(
@@ -43,7 +44,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                         padding: EdgeInsets.only(bottom: 7),
                         child: Text('Curso',
                         style: TextStyle(
-                          color:  Color(0xff2f30a1),
+                          color: CustomColors.darkBlue,
                           fontSize: 17,
                           fontWeight: FontWeight.bold
                           ),
@@ -54,7 +55,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                         child: ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(selectedYear == 1 ?
-                            Colors.redAccent : Color(0xff256be6)),
+                            Colors.redAccent : CustomColors.medBlue),
                           ),
                             onPressed: () {
                               setState(() {
@@ -68,7 +69,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                         child: ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(selectedYear == 2 ?
-                            Colors.redAccent : Color(0xff256be6) ),
+                            Colors.redAccent : CustomColors.medBlue),
                           ),
                           onPressed: () {
                             setState(() {
@@ -82,7 +83,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                         padding: EdgeInsets.only(bottom: 7),
                         child: Text('Grado',
                           style: TextStyle(
-                              color:  Color(0xff2f30a1),
+                              color:  CustomColors.darkBlue,
                               fontSize: 17,
                               fontWeight: FontWeight.bold
                           ),
@@ -94,7 +95,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                         child: ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(selectedCourse == 1 ?
-                            Colors.redAccent : Color(0xff256be6) ),
+                            Colors.redAccent : CustomColors.medBlue),
                           ),
                           onPressed: () {
                             setState(() {
@@ -114,7 +115,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                         child: ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(selectedCourse == 2 ?
-                            Colors.redAccent : Color(0xff256be6) ),
+                            Colors.redAccent : CustomColors.medBlue),
                           ),
                           onPressed: () {
                             setState(() {
@@ -130,7 +131,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                         padding: EdgeInsets.only(bottom: 7),
                         child: Text('Modalidad',
                           style: TextStyle(
-                              color:  Color(0xff2f30a1),
+                              color: CustomColors.darkBlue,
                               fontSize: 17,
                               fontWeight: FontWeight.bold
                           ),
@@ -141,7 +142,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                         child: ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(selectedModal == 1 ?
-                            Colors.redAccent : Color(0xff256be6) ),
+                            Colors.redAccent : CustomColors.medBlue),
                           ),
                           onPressed: () {
                             setState(() {
@@ -158,7 +159,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                         child: ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all(selectedModal == 2 ?
-                            Colors.redAccent : Color(0xff256be6) ),
+                            Colors.redAccent : CustomColors.medBlue),
                           ),
                           onPressed: () {
                             setState(() {
@@ -180,7 +181,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                             children: [
                               Text('A Pagar:',
                               style: TextStyle(
-                                color: Color(0xff2f30a1),
+                                color: CustomColors.darkBlue,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18
                                 ),
@@ -202,7 +203,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                       SizedBox(height: 15,),
                       Text('Métodos De Pago',
                         style: TextStyle(
-                            color:  Color(0xff2f30a1),
+                            color: CustomColors.darkBlue,
                             fontSize: 17,
                             fontWeight: FontWeight.bold
                         ),
@@ -218,7 +219,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                         child: ExpansionTile(
                           title: Text('Tarjeta De Crédito',
                           style: TextStyle(
-                            color: Color(0xff2f30a1),
+                              color: CustomColors.darkBlue,
                             fontWeight: FontWeight.bold
                             ),
                             textAlign: TextAlign.center,
@@ -433,7 +434,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                                 child: ElevatedButton(
                                   style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all(true ?
-                                    Color(0xff256be6) : Color(0xfffca3ce)),
+                                    CustomColors.medBlue : Color(0xfffca3ce)),
                                   ),
                                   onPressed: () async {
                                     Navigator.pushReplacementNamed(context, '/studentHome');

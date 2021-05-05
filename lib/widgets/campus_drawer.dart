@@ -1,3 +1,4 @@
+import 'package:cesurcampusonline/data/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -59,7 +60,7 @@ class CampusDrawer extends StatelessWidget {
 
                       Container(
                         decoration: BoxDecoration(
-                          color: Color(0xfff54747),
+                          color: CustomColors.red,
                         ),
                         child: ListTile(
                           leading: Icon(Icons.logout, color: Colors.white,),
@@ -70,6 +71,7 @@ class CampusDrawer extends StatelessWidget {
                             ),
                           ),
                           onTap: (){
+                            Navigator.pushReplacementNamed(context, '/login');
 
                           },
                         ),

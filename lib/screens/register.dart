@@ -1,5 +1,7 @@
+import 'package:cesurcampusonline/data/constants.dart';
 import 'package:cesurcampusonline/screens/module_payment.dart';
 import 'package:cesurcampusonline/widgets/appBar.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -32,10 +34,10 @@ class _RegisterState extends State<Register> {
             padding: EdgeInsets.symmetric(horizontal: 40),
             child: Container(
               decoration: BoxDecoration(
-                color: Color(0xffd7e1fa).withOpacity(0.7),
+                color: CustomColors.bgLightBlue.withOpacity(0.7),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    color: Color(0xffd7e1fa),
+                    color: CustomColors.bgLightBlue,
                     blurRadius: 10.0,
                     offset: Offset(1.0, 1.0),
                   ),
@@ -50,7 +52,7 @@ class _RegisterState extends State<Register> {
                     padding: EdgeInsets.symmetric(vertical: 30),
                     child: Text('ACCESO AL AULA VIRTUAL',
                       style: TextStyle(
-                          color:  Color(0xff2f30a1),
+                          color:  CustomColors.darkBlue,
                           fontSize: 19,
                           fontWeight: FontWeight.bold
                       ),
@@ -64,7 +66,7 @@ class _RegisterState extends State<Register> {
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color:  Color(0xff2f30a1),
+                            color:  CustomColors.darkBlue,
                             width: 1.5,
                           ),
                           borderRadius: BorderRadius.all(
@@ -86,7 +88,7 @@ class _RegisterState extends State<Register> {
                         isDense: true,
                         hintText: 'Email',
                         prefixIcon: Icon(Icons.account_circle,
-                          color:  Color(0xff2f30a1),
+                          color:  CustomColors.darkBlue,
                         ),
                       ),
                     ),
@@ -99,7 +101,7 @@ class _RegisterState extends State<Register> {
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color:  Color(0xff2f30a1),
+                            color:  CustomColors.darkBlue,
                             width: 1.5,
                           ),
                           borderRadius: BorderRadius.all(
@@ -121,7 +123,7 @@ class _RegisterState extends State<Register> {
                         isDense: true,
                         hintText: 'Nombre Completo',
                         prefixIcon: Icon(Icons.account_circle,
-                          color:  Color(0xff2f30a1),
+                          color:  CustomColors.darkBlue,
                         ),
                       ),
                     ),
@@ -134,7 +136,7 @@ class _RegisterState extends State<Register> {
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color:  Color(0xff2f30a1),
+                            color:  CustomColors.darkBlue,
                             width: 1.5,
                           ),
                           borderRadius: BorderRadius.all(
@@ -156,7 +158,7 @@ class _RegisterState extends State<Register> {
                         isDense: true,
                         hintText: 'Contraseña',
                         prefixIcon: Icon(Icons.account_circle,
-                          color:  Color(0xff2f30a1),
+                          color:  CustomColors.darkBlue,
                         ),
                       ),
                     ),
@@ -169,7 +171,7 @@ class _RegisterState extends State<Register> {
                         height: 40,
                         child: ElevatedButton(
                           style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(Color(0xff2f30a1),
+                            backgroundColor: MaterialStateProperty.all(CustomColors.darkBlue,
                             ),
                           ),
                           onPressed: ()  async {
@@ -205,9 +207,12 @@ class _RegisterState extends State<Register> {
                               TextSpan(
                                 text: ' Inicie Sesión.',
                                 style: TextStyle(
-                                  color: Color(0xff2fbdec),
+                                  color: CustomColors.textLightBlue,
                                   fontSize: 16.0,
                                 ),
+                                  recognizer: TapGestureRecognizer()..onTap = () {
+                                    Navigator.popAndPushNamed(context, '/login');
+                                  }
                               ),
                             ],
                           ),
@@ -255,7 +260,7 @@ class _RegisterState extends State<Register> {
                         padding: EdgeInsets.symmetric(vertical: 20),
                         child: Text('MANUAL DE USO',
                           style: TextStyle(
-                              color:  Color(0xff2f30a1),
+                              color:  CustomColors.darkBlue,
                               fontSize: 19,
                               fontWeight: FontWeight.bold
                           ),
@@ -266,7 +271,7 @@ class _RegisterState extends State<Register> {
                         padding: EdgeInsets.symmetric(vertical:3, horizontal: 20),
                         child: Text('Si tienes dudas sobre el funcionamiento de la plataforma puedes pinchar aquí.',
                           style: TextStyle(
-                              color:  Color(0xff4d4d4f),
+                              color:  CustomColors.darkGrey,
                               fontSize: 16,
                               fontWeight: FontWeight.bold
                           ),
@@ -288,7 +293,6 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: CampusAppBar(),
       body: _buildBody(),
     );
   }

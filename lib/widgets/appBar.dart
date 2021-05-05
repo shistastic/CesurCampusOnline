@@ -1,7 +1,8 @@
+import 'package:cesurcampusonline/data/constants.dart';
 import 'package:flutter/material.dart';
 
 class CampusAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final Color backgroundColor = Color(0xff17267a);
+  final Color backgroundColor = CustomColors.barsDarkBlue;
   final Text? title;
   final AppBar appbar = AppBar();
   final List<Widget>? actions;
