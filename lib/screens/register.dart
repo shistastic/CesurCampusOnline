@@ -226,8 +226,7 @@ class _RegisterState extends State<Register> {
             padding: EdgeInsets.symmetric(vertical: 50, horizontal: 50),
             child: GestureDetector(
               onTap: () async {
-                await canLaunch('https://campusonline.cesurformacion.com/upload/ManualdeUsuario.pdf');
-
+                await launch('https://campusonline.cesurformacion.com/upload/ManualdeUsuario.pdf');
               },
               child: Container(
                 decoration: BoxDecoration(
