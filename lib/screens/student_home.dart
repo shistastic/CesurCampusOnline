@@ -4,13 +4,7 @@ import 'package:cesurcampusonline/widgets/appBar.dart';
 import 'package:cesurcampusonline/widgets/campus_drawer.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login/flutter_login.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-// const users = const {
-//   'admin@admin.com': 'admin',
-//   'alejandro@alejandro.com': 'tenpiedad',
-// };
 
 class StudentHome extends StatefulWidget {
 

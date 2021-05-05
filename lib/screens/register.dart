@@ -1,9 +1,6 @@
 import 'package:cesurcampusonline/data/constants.dart';
-import 'package:cesurcampusonline/screens/module_payment.dart';
-import 'package:cesurcampusonline/widgets/appBar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_login/flutter_login.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // const users = const {
