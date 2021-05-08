@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:cesurcampusonline/data/constants.dart';
+import 'package:cesurcampusonline/data/http_calls.dart';
 import 'package:cesurcampusonline/widgets/appBar.dart';
 import 'package:flutter/material.dart';
 // import 'package:stripe_payment/stripe_payment.dart';
@@ -15,6 +18,19 @@ class _ModulePaymentState extends State<ModulePayment> {
   int selectedModal = 0;
 
   double total = 0;
+
+
+  //Fixme Create a Future builder with the showCourse construct
+  var response;
+  late Map<String, dynamic> jsonResponse;
+
+  @override
+  void initState() {
+    super.initState();
+    response = showCourse('1');
+    jsonResponse = jsonDecode(response);
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +203,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                                 ),
                               ),
                               SizedBox(width: 10,),
-                              Text('1.490,00€',
+                              Text('df',
                                 style: TextStyle(
                                     fontSize: 16
                                 ),

@@ -14,7 +14,7 @@ void main() {
   //View Routing
   runApp(
     MaterialApp(
-      initialRoute: '/studentHome',
+      initialRoute: '/login',
       routes: {
         '/login': (context) => Login(),
         '/register': (context) => Register(),

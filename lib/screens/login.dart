@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:cesurcampusonline/data/constants.dart';
+import 'package:cesurcampusonline/data/http_calls.dart';
+import 'package:cesurcampusonline/models/user_model.dart';
 import 'package:cesurcampusonline/screens/module_payment.dart';
 import 'package:cesurcampusonline/widgets/appBar.dart';
 import 'package:flutter/gestures.dart';
@@ -17,6 +21,10 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+
+  String? dni;
+  String? password;
+
   @override
   Widget _buildBody(){
     return SafeArea(
@@ -62,7 +70,10 @@ class _LoginState extends State<Login> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: TextFormField(
-
+                        onChanged: (value){
+                          dni = value;
+                          print(dni);
+                        },
                         decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -97,7 +108,9 @@ class _LoginState extends State<Login> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: TextFormField(
-
+                        onChanged: (value) {
+                          password = value;
+                        },
                         decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -140,8 +153,22 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                             onPressed: ()  async {
-                              Navigator.pushReplacementNamed(context, '/modulePayment');
+                              var response = await userLogin(dni!, password!);
+                              Map<String, dynamic> jsonResponse = jsonDecode(response);
+                              print(jsonResponse['student'][0]['dni']);
 
+                              if(response != '400'){
+                                User user = User(
+                                    userId: jsonResponse['student'][0]['id'],
+                                    email: jsonResponse['student'][0]['email'],
+                                    fullName: jsonResponse['student'][0]['fullname'],
+                                    dni: jsonResponse['student'][0]['dni']
+                                );
+                                await insertUser(user);
+                                Navigator.pushReplacementNamed(context, '/modulePayment');
+                              } else {
+
+                              }
                             },
                             child: Text(
                               'Iniciar Sesión',

@@ -1,4 +1,5 @@
 import 'package:cesurcampusonline/data/constants.dart';
+import 'package:cesurcampusonline/data/http_calls.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -15,6 +16,12 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+
+  String? fullName;
+  String? email;
+  String? dni;
+  String? password;
+
   @override
   Widget _buildBody(){
     return Container(
@@ -59,7 +66,9 @@ class _RegisterState extends State<Register> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 40),
                     child: TextFormField(
-
+                      onChanged: (value) {
+                        email = value;
+                      },
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -94,7 +103,9 @@ class _RegisterState extends State<Register> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 40),
                     child: TextFormField(
-
+                      onChanged: (value) {
+                        fullName = value;
+                      },
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -129,7 +140,46 @@ class _RegisterState extends State<Register> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 40),
                     child: TextFormField(
-
+                      onChanged: (value) {
+                        dni = value;
+                      },
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color:  CustomColors.darkBlue,
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(0),
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 2.0,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(0),
+                          ),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true,
+                        contentPadding: EdgeInsets.only(top: 20),
+                        isDense: true,
+                        hintText: 'DNI/NIE',
+                        prefixIcon: Icon(Icons.account_circle,
+                          color:  CustomColors.darkBlue,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 25,),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 40),
+                    child: TextFormField(
+                      onChanged: (value) {
+                        password = value;
+                      },
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -172,8 +222,13 @@ class _RegisterState extends State<Register> {
                             ),
                           ),
                           onPressed: ()  async {
-                            Navigator.pushReplacementNamed(context, '/login');
-
+                            var response = await addStudent(fullName!, dni!, email!, password!);
+                            print(response);
+                            if(response == '200') {
+                              Navigator.pushReplacementNamed(context, '/login');
+                            } else {
+                              print('Not registered!');
+                            }
                           },
                           child: Text(
                             'Registro',
