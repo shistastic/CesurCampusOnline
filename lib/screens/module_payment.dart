@@ -2,11 +2,17 @@ import 'dart:convert';
 
 import 'package:cesurcampusonline/data/constants.dart';
 import 'package:cesurcampusonline/data/http_calls.dart';
+import 'package:cesurcampusonline/models/user_model.dart';
 import 'package:cesurcampusonline/widgets/appBar.dart';
 import 'package:flutter/material.dart';
 // import 'package:stripe_payment/stripe_payment.dart';
 
 class ModulePayment extends StatefulWidget {
+
+  User user;
+
+  ModulePayment(this.user);
+
   @override
   _ModulePaymentState createState() => _ModulePaymentState();
 }
@@ -24,11 +30,18 @@ class _ModulePaymentState extends State<ModulePayment> {
   var response;
   late Map<String, dynamic> jsonResponse;
 
+  getCoursePrice() async {
+    response = await showCourse('1');
+    jsonResponse = jsonDecode(response);
+    print(jsonResponse['course'][0]['price']);
+    return jsonResponse;
+  }
+
   @override
   void initState() {
     super.initState();
-    response = showCourse('1');
-    jsonResponse = jsonDecode(response);
+
+    getCoursePrice();
 
   }
 
@@ -203,7 +216,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                                 ),
                               ),
                               SizedBox(width: 10,),
-                              Text('df',
+                              Text('€',
                                 style: TextStyle(
                                     fontSize: 16
                                 ),

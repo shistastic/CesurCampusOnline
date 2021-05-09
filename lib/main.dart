@@ -18,7 +18,6 @@ void main() {
       routes: {
         '/login': (context) => Login(),
         '/register': (context) => Register(),
-        '/modulePayment': (context) => ModulePayment(),
         '/studentHome': (context) => StudentHome(),
       },
 

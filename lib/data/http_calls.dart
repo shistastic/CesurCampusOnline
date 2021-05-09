@@ -3,11 +3,17 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiEndpoints {
-  static const url = '10.0.0.190:8000';
+  static const url = '192.168.18.3:8000';
   static const login = 'login/';
   static const addStudent = 'addstudent/';
+  static const addTeacher = 'addteacher/';
+  static const addCourse = 'addcourse/';
+  static const addSubject = 'addsubject/';
+  static const showStudentById = 'showstudent/';
+  static const showStudentByCourse = 'showstudentcourse/';
+  static const showContent = 'showcontent/';
+  static const showAllCourse = 'showallcourses/';
   static const showCourse = 'showcourses/';
-
 
 }
 
@@ -42,5 +48,15 @@ Future<String> showCourse(String id) async {
     body: {'id': id},
   );
   print(request.body);
+  return request.body;
+}
+
+Future<String> showAllCourses() async {
+  Uri uri = Uri.http(ApiEndpoints.url, ApiEndpoints.showAllCourse);
+  print(uri);
+  var request = await http.post(
+    uri
+  );
+  print("All Courses: ${request.body}");
   return request.body;
 }

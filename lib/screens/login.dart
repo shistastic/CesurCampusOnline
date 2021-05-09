@@ -156,7 +156,7 @@ class _LoginState extends State<Login> {
                               var response = await userLogin(dni!, password!);
                               Map<String, dynamic> jsonResponse = jsonDecode(response);
                               print(jsonResponse['student'][0]['dni']);
-
+                              await showAllCourses();
                               if(response != '400'){
                                 User user = User(
                                     userId: jsonResponse['student'][0]['id'],
@@ -165,7 +165,9 @@ class _LoginState extends State<Login> {
                                     dni: jsonResponse['student'][0]['dni']
                                 );
                                 await insertUser(user);
-                                Navigator.pushReplacementNamed(context, '/modulePayment');
+                                await Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (_) => ModulePayment(user)));
+                                // Navigator.pushReplacementNamed(context, '/modulePayment');
                               } else {
 
                               }
