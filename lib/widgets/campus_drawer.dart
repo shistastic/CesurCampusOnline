@@ -1,4 +1,6 @@
 import 'package:cesurcampusonline/data/constants.dart';
+import 'package:cesurcampusonline/screens/content.dart';
+import 'package:cesurcampusonline/screens/student_home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -34,8 +36,9 @@ class CampusDrawer extends StatelessWidget {
                         color: Colors.black,
                       ),
                       title: Text('General'),
-                      onTap: (){
-
+                      onTap: () async {
+                        await Navigator.of(context).push(MaterialPageRoute(
+                            builder: (_) => StudentHome()));
                       }
                   ),
                   ListTile(

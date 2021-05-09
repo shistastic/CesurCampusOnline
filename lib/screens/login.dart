@@ -5,6 +5,7 @@ import 'package:cesurcampusonline/data/http_calls.dart';
 import 'package:cesurcampusonline/models/user_model.dart';
 import 'package:cesurcampusonline/screens/module_payment.dart';
 import 'package:cesurcampusonline/widgets/appBar.dart';
+import 'package:cesurcampusonline/widgets/loading_button.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -147,9 +148,14 @@ class _LoginState extends State<Login> {
                         child: Container(
                           width: 215,
                           height: 40,
-                          child: ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(CustomColors.darkBlue,
+                          child: CustomButton(
+                            title: Text(
+                              'Iniciar Sesión',
+                              style: TextStyle(
+                                color: Colors.white,
+                                letterSpacing: 1.2,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.0,
                               ),
                             ),
                             onPressed: ()  async {
@@ -172,15 +178,6 @@ class _LoginState extends State<Login> {
 
                               }
                             },
-                            child: Text(
-                              'Iniciar Sesión',
-                              style: TextStyle(
-                                color: Colors.white,
-                                letterSpacing: 1.2,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16.0,
-                              ),
-                            ),
                           ),
                         ),
                       ),

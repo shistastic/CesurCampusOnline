@@ -1,5 +1,7 @@
 import 'package:cesurcampusonline/data/constants.dart';
 import 'package:cesurcampusonline/screens/module_payment.dart';
+import 'package:cesurcampusonline/screens/content.dart';
+import 'package:cesurcampusonline/screens/subject.dart';
 import 'package:cesurcampusonline/widgets/appBar.dart';
 import 'package:cesurcampusonline/widgets/campus_drawer.dart';
 import 'package:flutter/gestures.dart';
@@ -129,7 +131,8 @@ class _StudentHomeState extends State<StudentHome> {
                                             ),
                                           ),
                                           onPressed: ()  async {
-
+                                            await Navigator.of(context).push(MaterialPageRoute(
+                                                builder: (_) => UserContent()));
                                           },
                                           child: Text(
                                             'Ver Tarea',
@@ -257,32 +260,39 @@ class _StudentHomeState extends State<StudentHome> {
                           textAlign: TextAlign.center,
                         ),
                         children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-                            child: Container(
-                              width: double.maxFinite,
-                              decoration: BoxDecoration(
-                                boxShadow: <BoxShadow>[
-                                  BoxShadow(
-                                    color: Colors.white60,
-                                    blurRadius: 10.0,
-                                    offset: Offset(1.0, 1.0),
-                                  ),
-                                ],
-                                border: Border.all(
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(vertical: 15),
-                                child: Column(
-                                  children: [
-                                    Text('Bases De Datos',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 17,
-                                      ),),
+                          GestureDetector(
+                            onTap: () async {
+                              await Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) => SubjectInfo()));
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                              child: Container(
+                                width: double.maxFinite,
+                                decoration: BoxDecoration(
+                                  boxShadow: <BoxShadow>[
+                                    BoxShadow(
+                                      color: Colors.white60,
+                                      blurRadius: 10.0,
+                                      offset: Offset(1.0, 1.0),
+                                    ),
                                   ],
+                                  border: Border.all(
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 15),
+                                  child: Column(
+                                    children: [
+                                      Text('Bases De Datos',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 17,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
