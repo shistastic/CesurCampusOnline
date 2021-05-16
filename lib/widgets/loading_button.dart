@@ -61,13 +61,13 @@ class CustomButton extends StatefulWidget {
   }
 
   void animateButton() {
-    _controller = AnimationController(duration: Duration(milliseconds: 1500), vsync: this);
+    _controller = AnimationController(duration: Duration(milliseconds: 2500), vsync: this);
     _controller!.forward();
     setState(() {
       _state = 1;
     });
 
-    Timer(Duration(milliseconds: 1500), () {
+    Timer(Duration(milliseconds: 2500), () {
       setState(() {
         _state = 0;
       });

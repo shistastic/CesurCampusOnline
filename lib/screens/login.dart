@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:another_flushbar/flushbar.dart';
 import 'package:cesurcampusonline/data/constants.dart';
 import 'package:cesurcampusonline/data/http_calls.dart';
 import 'package:cesurcampusonline/models/user_model.dart';
 import 'package:cesurcampusonline/screens/module_payment.dart';
+import 'package:cesurcampusonline/screens/register.dart';
 import 'package:cesurcampusonline/widgets/appBar.dart';
 import 'package:cesurcampusonline/widgets/loading_button.dart';
 import 'package:flutter/gestures.dart';
@@ -109,6 +111,7 @@ class _LoginState extends State<Login> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: TextFormField(
+                        obscureText: true,
                         onChanged: (value) {
                           password = value;
                         },
@@ -160,10 +163,10 @@ class _LoginState extends State<Login> {
                             ),
                             onPressed: ()  async {
                               var response = await userLogin(dni!, password!);
-                              Map<String, dynamic> jsonResponse = jsonDecode(response);
-                              print(jsonResponse['student'][0]['dni']);
-                              await showAllCourses();
-                              if(response != '400'){
+                              print('this is response: $response');
+                              // await showAllCourses();
+                              if(response == '200'){
+                                Map<String, dynamic> jsonResponse = jsonDecode(response);
                                 User user = User(
                                     userId: jsonResponse['student'][0]['id'],
                                     email: jsonResponse['student'][0]['email'],
@@ -174,8 +177,27 @@ class _LoginState extends State<Login> {
                                 await Navigator.of(context).push(MaterialPageRoute(
                                     builder: (_) => ModulePayment(user)));
                                 // Navigator.pushReplacementNamed(context, '/modulePayment');
-                              } else {
+                              } else if( response == 'false'){
+                                  Flushbar(
+                                    title: "Credenciales Incorrectas",
+                                    message: "La combinación usuario/contraseña introducidos no es correcto.",
+                                    mainButton: FlatButton(
+                                      color: Colors.white,
+                                      onPressed: () async {
+                                        await Navigator.of(context).push(MaterialPageRoute(
+                                            builder: (_) => Register()));                                                },
+                                      child: Text(
+                                        "Registrarse",
+                                        style: TextStyle(
 
+                                        ),
+                                      ),
+                                    ),
+                                    icon: Icon(Icons.cancel_outlined,
+                                      color: Colors.white,
+                                    ),
+                                    duration: Duration(seconds: 3),
+                                  )..show(context);
                               }
                             },
                           ),

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -20,12 +21,18 @@ class ApiEndpoints {
 Future<String> userLogin(String dni, String password) async {
   Uri uri = Uri.http(ApiEndpoints.url, ApiEndpoints.login);
   print(uri);
-  var request = await http.post(
-    uri,
-    body: {'dni': dni, 'password': password},
-  );
-  print(request.body);
-  return request.body;
+  try {
+    var request = await http.post(
+      uri,
+      body: {'dni': dni, 'password': password},
+    ).timeout(Duration(seconds: 3));
+
+    print(request.body);
+    return request.body;
+  } on TimeoutException catch(_) {
+    return 'false';
+  }
+
 }
 
 
