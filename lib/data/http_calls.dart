@@ -16,6 +16,7 @@ class ApiEndpoints {
   static const showAllCourse = 'showallcourses/';
   static const showCourse = 'showcourses/';
   static const showCourseYear = 'showcoursesyear/';
+  static const showSubject = 'showsubject/';
   static const payCourse = 'payCourse/';
 
 }
@@ -89,5 +90,27 @@ Future<String> payCourse(String username, String email, String payToken, String 
       body: {'nickname': username, 'email': email, 'stripeToken': payToken, 'amount': amount},
   );
   print("Payment Code: ${request.body}");
+  return request.body;
+}
+
+Future<String> showSubject(String id) async {
+  Uri uri = Uri.http(ApiEndpoints.url, ApiEndpoints.showSubject);
+  print(uri);
+  var request = await http.post(
+    uri,
+    body: {'course_id': id},
+  );
+  print(request.body);
+  return request.body;
+}
+
+Future<String> showContent(String state) async {
+  Uri uri = Uri.http(ApiEndpoints.url, ApiEndpoints.showContent);
+  print(uri);
+  var request = await http.post(
+    uri,
+    body: {'state': state},
+  );
+  print(request.body);
   return request.body;
 }
