@@ -1,4 +1,5 @@
 import 'package:cesurcampusonline/data/constants.dart';
+import 'package:cesurcampusonline/models/content_model.dart';
 import 'package:cesurcampusonline/models/user_model.dart';
 import 'package:cesurcampusonline/screens/module_payment.dart';
 import 'package:cesurcampusonline/widgets/appBar.dart';
@@ -10,8 +11,9 @@ import 'package:flutter/material.dart';
 class UserContent extends StatefulWidget {
 
   User user;
+  Content content;
 
-  UserContent(this.user);
+  UserContent(this.user, this.content);
 
   @override
   _UserContentState createState() => _UserContentState();
@@ -54,7 +56,7 @@ class _UserContentState extends State<UserContent> {
                       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
                       child: Column(
                         children: <Widget>[
-                          Text('Bases De Datos',
+                          Text(widget.content.subject_name!,
                             style: TextStyle(
                               color: CustomColors.darkBlue,
                               fontWeight: FontWeight.bold,
@@ -68,7 +70,7 @@ class _UserContentState extends State<UserContent> {
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 5),
-                            child: Text('Unidad 1 Tarea 1',
+                            child: Text(widget.content.title!,
                               style: TextStyle(
                                 color: CustomColors.darkGrey,
                                 fontWeight: FontWeight.bold,
@@ -79,7 +81,7 @@ class _UserContentState extends State<UserContent> {
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 10),
-                            child: Text('Descarga el siguiente archivo y contesta a cada una de las cuestiones.',
+                            child: Text(widget.content.description!,
                               style: TextStyle(
                                 color: CustomColors.darkGrey,
                                 fontWeight: FontWeight.bold,
@@ -167,7 +169,14 @@ class _UserContentState extends State<UserContent> {
                                 padding: EdgeInsets.symmetric(vertical: 5),
                                 child: Container(
                                   width: 110,
-                                  child: Text('Enviado',
+                                  child: widget.content.state! ? Text('Entregado',
+                                    style: TextStyle(
+                                      color: CustomColors.darkGrey,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ) : Text('No Entregado',
                                     style: TextStyle(
                                       color: CustomColors.darkGrey,
                                       fontWeight: FontWeight.bold,

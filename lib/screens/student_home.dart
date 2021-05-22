@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cesurcampusonline/data/constants.dart';
+import 'package:cesurcampusonline/models/content_model.dart';
 import 'package:cesurcampusonline/models/user_model.dart';
 import 'package:cesurcampusonline/screens/module_payment.dart';
 import 'package:cesurcampusonline/screens/content.dart';
@@ -172,8 +173,23 @@ class _StudentHomeState extends State<StudentHome> {
                                                         ),
                                                       ),
                                                       onPressed: ()  async {
+                                                        Content content = Content(
+                                                            id: 1,
+                                                            content: data['content'][index]['content'],
+                                                            title: data['content'][index]['title'],
+                                                            description: data['content'][index]['description'],
+                                                            subject_id: data['content'][index]['subject_id'],
+                                                            subject_name: data['content'][index]['subject_name'],
+                                                          state: data['content'][index]['state'],
+                                                        );
+                                                        print(content.id);
+                                                        print(content.content);
+                                                        print(content.title);
+                                                        print(content.subject_id);
+                                                        print(content.subject_name);
+                                                        print(content.state);
                                                         await Navigator.of(context).push(MaterialPageRoute(
-                                                            builder: (_) => UserContent(widget.user)));
+                                                            builder: (_) => UserContent(widget.user, content)));
                                                       },
                                                       child: Text(
                                                         'Ver Tarea',
