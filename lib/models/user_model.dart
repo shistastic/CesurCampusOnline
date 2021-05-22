@@ -9,13 +9,15 @@ class User {
   int userId;
   String email;
   String dni;
+  String accountType;
 
   User({
     this.id,
     required this.userId,
     required this.email,
     required this.fullName,
-    required this.dni
+    required this.dni,
+    required this.accountType,
   });
 
   Map<String, dynamic> toMap() {
@@ -24,7 +26,8 @@ class User {
       'userId': userId,
       'email': email,
       'fullName': fullName,
-      'dni': dni
+      'dni': dni,
+      'accountType': accountType
     };
   }
 }

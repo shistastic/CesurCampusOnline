@@ -6,6 +6,7 @@ import 'package:cesurcampusonline/data/http_calls.dart';
 import 'package:cesurcampusonline/models/user_model.dart';
 import 'package:cesurcampusonline/screens/module_payment.dart';
 import 'package:cesurcampusonline/screens/register.dart';
+import 'package:cesurcampusonline/screens/student_home.dart';
 import 'package:cesurcampusonline/widgets/appBar.dart';
 import 'package:cesurcampusonline/widgets/loading_button.dart';
 import 'package:flutter/gestures.dart';
@@ -165,18 +166,27 @@ class _LoginState extends State<Login> {
                               var response = await userLogin(dni!, password!);
                               print('this is response: $response');
                               // await showAllCourses();
-                              if(response == '200'){
+                              if(true){
                                 Map<String, dynamic> jsonResponse = jsonDecode(response);
+                                print(jsonResponse['student'][0]['acc_type']);
                                 User user = User(
                                     userId: jsonResponse['student'][0]['id'],
                                     email: jsonResponse['student'][0]['email'],
                                     fullName: jsonResponse['student'][0]['fullname'],
-                                    dni: jsonResponse['student'][0]['dni']
+                                    dni: jsonResponse['student'][0]['dni'],
+                                    accountType: jsonResponse['student'][0]['acc_type'].toString()
                                 );
                                 await insertUser(user);
-                                await Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => ModulePayment(user)));
-                                // Navigator.pushReplacementNamed(context, '/modulePayment');
+
+                                if(user.accountType == '1'){
+                                  await Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (_) => StudentHome(user)));
+                                }
+                                else{
+                                  await Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (_) => ModulePayment(user)));
+                                  // Navigator.pushReplacementNamed(context, '/modulePayment');
+                                }
                               } else if( response == 'false'){
                                   Flushbar(
                                     title: "Credenciales Incorrectas",

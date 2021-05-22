@@ -1,4 +1,5 @@
 import 'package:cesurcampusonline/data/constants.dart';
+import 'package:cesurcampusonline/models/user_model.dart';
 import 'package:cesurcampusonline/screens/module_payment.dart';
 import 'package:cesurcampusonline/widgets/appBar.dart';
 import 'package:cesurcampusonline/widgets/campus_drawer.dart';
@@ -7,6 +8,10 @@ import 'package:flutter/material.dart';
 
 
 class UserContent extends StatefulWidget {
+
+  User user;
+
+  UserContent(this.user);
 
   @override
   _UserContentState createState() => _UserContentState();
@@ -332,7 +337,7 @@ class _UserContentState extends State<UserContent> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: SafeArea(
-        child: CampusDrawer(),
+        child: CampusDrawer(widget.user),
       ),
       appBar: CampusAppBar(),
       body: _buildBody(),

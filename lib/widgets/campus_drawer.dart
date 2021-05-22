@@ -1,10 +1,16 @@
 import 'package:cesurcampusonline/data/constants.dart';
+import 'package:cesurcampusonline/models/user_model.dart';
 import 'package:cesurcampusonline/screens/content.dart';
 import 'package:cesurcampusonline/screens/student_home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CampusDrawer extends StatelessWidget {
+
+  User user;
+
+  CampusDrawer(this.user);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -38,7 +44,7 @@ class CampusDrawer extends StatelessWidget {
                       title: Text('General'),
                       onTap: () async {
                         await Navigator.of(context).push(MaterialPageRoute(
-                            builder: (_) => StudentHome()));
+                            builder: (_) => StudentHome(user)));
                       }
                   ),
                   ListTile(

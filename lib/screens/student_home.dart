@@ -1,4 +1,5 @@
 import 'package:cesurcampusonline/data/constants.dart';
+import 'package:cesurcampusonline/models/user_model.dart';
 import 'package:cesurcampusonline/screens/module_payment.dart';
 import 'package:cesurcampusonline/screens/content.dart';
 import 'package:cesurcampusonline/screens/subject.dart';
@@ -9,6 +10,10 @@ import 'package:flutter/material.dart';
 
 
 class StudentHome extends StatefulWidget {
+
+  User user;
+
+  StudentHome(this.user);
 
   @override
   _StudentHomeState createState() => _StudentHomeState();
@@ -132,7 +137,7 @@ class _StudentHomeState extends State<StudentHome> {
                                           ),
                                           onPressed: ()  async {
                                             await Navigator.of(context).push(MaterialPageRoute(
-                                                builder: (_) => UserContent()));
+                                                builder: (_) => UserContent(widget.user)));
                                           },
                                           child: Text(
                                             'Ver Tarea',
@@ -263,7 +268,7 @@ class _StudentHomeState extends State<StudentHome> {
                           GestureDetector(
                             onTap: () async {
                               await Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (_) => SubjectInfo()));
+                                  builder: (_) => SubjectInfo(widget.user)));
                             },
                             child: Padding(
                               padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
@@ -344,7 +349,7 @@ class _StudentHomeState extends State<StudentHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: SafeArea(
-        child: CampusDrawer(),
+        child: CampusDrawer(widget.user),
       ),
       appBar: CampusAppBar(),
       body: _buildBody(),

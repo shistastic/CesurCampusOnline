@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiEndpoints {
-  static const url = '10.0.0.129:8000';
+  static const url = '10.0.0.190:8000';
   static const login = 'login/';
   static const addStudent = 'addstudent/';
   static const addTeacher = 'addteacher/';

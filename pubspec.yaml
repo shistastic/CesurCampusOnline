@@ -27,6 +27,7 @@ dependencies:
   url_launcher:
   http:
   another_flushbar:
+  stripe_payment:
 
 flutter_icons:
   image_path: "assets/images/Cesur - Logo.png"
