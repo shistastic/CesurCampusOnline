@@ -522,7 +522,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                                   ),
                                   onPressed: () async {
                                     await StripePayment.createTokenWithCard(
-                                      creditCard(12, 21,'4242424242424242', '123'),
+                                      creditCard(expMonth, expYear, cardNumber!, cvc!),
                                     ).then((token) {
                                       // _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Received ${token.tokenId}')));
                                       setState(() {
@@ -533,7 +533,7 @@ class _ModulePaymentState extends State<ModulePayment> {
 
                                     print('Paying in process...');
                                     priceCents = int.parse(coursePrice!) * 100;
-                                    await payCourse(widget.user.fullName, 'adfa@dasf.com', paymentToken!.tokenId!,
+                                    await payCourse(widget.user.fullName, widget.user.email, paymentToken!.tokenId!,
                                       priceCents.toString());
                                     print('paid');
                                     await Navigator.of(context).push(MaterialPageRoute(

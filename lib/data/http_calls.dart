@@ -17,7 +17,10 @@ class ApiEndpoints {
   static const showCourse = 'showcourses/';
   static const showCourseYear = 'showcoursesyear/';
   static const showSubject = 'showsubject/';
-  static const payCourse = 'payCourse/';
+  static const payCourse = 'paycourse/';
+  static const addContent = 'addcontent/';
+  static const updateUser = 'updateUser/';
+  static const addAssignment = 'addAssignment';
 
 }
 
@@ -93,6 +96,7 @@ Future<String> payCourse(String username, String email, String payToken, String 
   return request.body;
 }
 
+
 Future<String> showSubject(String id) async {
   Uri uri = Uri.http(ApiEndpoints.url, ApiEndpoints.showSubject);
   print(uri);
@@ -103,6 +107,7 @@ Future<String> showSubject(String id) async {
   print(request.body);
   return request.body;
 }
+
 
 Future<String> showContent(String state) async {
   Uri uri = Uri.http(ApiEndpoints.url, ApiEndpoints.showContent);
@@ -116,9 +121,9 @@ Future<String> showContent(String state) async {
 }
 
 Future showContentPDF(String id) async {
-  Uri uri = Uri.http(ApiEndpoints.url, ApiEndpoints.showContent+'2/');
+  Uri uri = Uri.http(ApiEndpoints.url, ApiEndpoints.showContent+'$id/');
   print(uri);
-  var request = await http.get(
+  var request = await http.post(
     uri
   );
   print(request.body);

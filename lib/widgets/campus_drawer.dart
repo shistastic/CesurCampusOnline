@@ -47,15 +47,6 @@ class CampusDrawer extends StatelessWidget {
                             builder: (_) => StudentHome(user)));
                       }
                   ),
-                  ListTile(
-                    leading: Icon(Icons.question_answer,
-                      color: Colors.black,
-                    ),
-                      title: Text('Chat'),
-                      onTap: (){
-
-                      }
-                  ),
                 ],
               ),
             ),

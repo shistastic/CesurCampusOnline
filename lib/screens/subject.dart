@@ -243,9 +243,6 @@ class _SubjectInfoState extends State<SubjectInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SafeArea(
-        child: CampusDrawer(widget.user),
-      ),
       appBar: CampusAppBar(),
       body: _buildBody(),
     );

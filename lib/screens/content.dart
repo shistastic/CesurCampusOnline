@@ -39,7 +39,7 @@ class _UserContentState extends State<UserContent> {
       var response = await request.close();
       if (response.statusCode == 200) {
         var bytes = await consolidateHttpClientResponseBytes(response);
-        filePath = '$dir/bla.pdf';
+        filePath = '$dir/${widget.content.content.toString()}';
         file = File(filePath);
         await file.writeAsBytes(bytes);
         await OpenFile.open(filePath);
@@ -323,7 +323,7 @@ class _UserContentState extends State<UserContent> {
                                 padding: EdgeInsets.symmetric(vertical: 5),
                                 child: Container(
                                   width: 110,
-                                  child: Text('Rowe_Adam_BD_UD1_T1.pdf',
+                                  child: Text(widget.content.content.toString(),
                                     style: TextStyle(
                                       color: CustomColors.darkGrey,
                                       fontWeight: FontWeight.bold,
@@ -381,9 +381,6 @@ class _UserContentState extends State<UserContent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SafeArea(
-        child: CampusDrawer(widget.user),
-      ),
       appBar: CampusAppBar(),
       body: _buildBody(),
     );
