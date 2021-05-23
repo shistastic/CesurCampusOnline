@@ -8,6 +8,7 @@ import 'package:cesurcampusonline/models/user_model.dart';
 import 'package:cesurcampusonline/screens/module_payment.dart';
 import 'package:cesurcampusonline/widgets/appBar.dart';
 import 'package:cesurcampusonline/widgets/campus_drawer.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -27,12 +28,12 @@ class UserContent extends StatefulWidget {
 }
 
 class _UserContentState extends State<UserContent> {
+
   Future<String> downloadFile(String url, String dir) async {
     HttpClient httpClient = new HttpClient();
     File file;
     String filePath = '';
     String myUrl = '';
-
     try {
       myUrl = url;
       var request = await httpClient.getUrl(Uri.parse(myUrl));
@@ -53,6 +54,21 @@ class _UserContentState extends State<UserContent> {
     }
     return filePath;
   }
+
+  uploadAssignment() async {
+    FilePickerResult result = (await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf']
+    ))!;
+
+    if(result != null) {
+      File file = File(result.files.single.path!);
+      await addAssignment('blabla', file, widget.content.id.toString());
+    } else {
+
+    }
+  }
+
 
   @override
   Widget _buildBody(){
@@ -351,7 +367,19 @@ class _UserContentState extends State<UserContent> {
                                     ),
                                   ),
                                   onPressed: ()  async {
+                                    FilePickerResult result = (await FilePicker.platform.pickFiles(
+                                        type: FileType.custom,
+                                        allowedExtensions: ['pdf']
+                                    ))!;
 
+                                    if(result != null) {
+                                      File file = File(result.files.single.path!);
+                                      print(file);
+                                      await addAssignment('blabla', file, widget.content.id.toString());
+                                    } else {
+
+                                    }
+                                    print('file uploaded');
                                   },
                                   child: Text('Agregar Tarea',
                                     style: TextStyle(

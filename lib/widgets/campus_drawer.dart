@@ -1,6 +1,7 @@
 import 'package:cesurcampusonline/data/constants.dart';
 import 'package:cesurcampusonline/models/user_model.dart';
 import 'package:cesurcampusonline/screens/content.dart';
+import 'package:cesurcampusonline/screens/profile.dart';
 import 'package:cesurcampusonline/screens/student_home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -33,8 +34,9 @@ class CampusDrawer extends StatelessWidget {
                       color: Colors.black,
                       ),
                       title: Text('Mi Perfil'),
-                      onTap: (){
-
+                      onTap: () async {
+                        await Navigator.of(context).push(MaterialPageRoute(
+                            builder: (_) => MyProfile(user)));
                       }
                   ),
                   ListTile(

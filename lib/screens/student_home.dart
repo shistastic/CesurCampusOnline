@@ -250,8 +250,9 @@ class _StudentHomeState extends State<StudentHome> {
                                     itemBuilder: (BuildContext ctxt, int index) {
                                       return GestureDetector(
                                         onTap: () async {
+                                          String subjectName = await data1['subjects'][index]['name'];
                                           await Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (_) => SubjectInfo(widget.user)));
+                                              builder: (_) => SubjectInfo(widget.user, subjectName)));
                                         },
                                         child: Padding(
                                           padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
@@ -20,7 +21,8 @@ class ApiEndpoints {
   static const payCourse = 'paycourse/';
   static const addContent = 'addcontent/';
   static const updateUser = 'updateUser/';
-  static const addAssignment = 'addAssignment';
+  static const addAssignment = 'addAssignment/';
+  static const showContentUnit = 'showcontentunit/';
 
 }
 
@@ -52,6 +54,31 @@ Future<String> addStudent(String fullName, String dni, String email, String pass
   print(request.body);
   return request.body;
 }
+
+
+Future addAssignment(String title, content, String contentId) async {
+  Uri uri = Uri.http(ApiEndpoints.url, ApiEndpoints.addStudent);
+  print(uri);
+  var request = await http.post(
+    uri,
+    body: {'title': title, 'content': content, 'content_id': contentId},
+  );
+  print(request.body);
+  return request.body;
+}
+
+
+Future showContentUnit(String unit, String subjectId) async {
+  Uri uri = Uri.http(ApiEndpoints.url, ApiEndpoints.showContentUnit);
+  print(uri);
+  var request = await http.post(
+    uri,
+    body: {'unit': unit, 'subject_name': subjectId},
+  );
+  print(request.body);
+  return request.body;
+}
+
 
 Future<String> showCourse(String id) async {
   Uri uri = Uri.http(ApiEndpoints.url, ApiEndpoints.showCourse);

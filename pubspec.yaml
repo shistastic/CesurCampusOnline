@@ -31,6 +31,7 @@ dependencies:
   open_file:
   android_external_storage:
   permission_handler:
+  file_picker:
 
 flutter_icons:
   image_path: "assets/images/Cesur - Logo.png"
