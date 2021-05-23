@@ -114,3 +114,14 @@ Future<String> showContent(String state) async {
   print(request.body);
   return request.body;
 }
+
+Future showContentPDF(String id) async {
+  Uri uri = Uri.http(ApiEndpoints.url, ApiEndpoints.showContent+'2/');
+  print(uri);
+  var request = await http.get(
+    uri
+  );
+  print(request.body);
+  return request.body;
+}
+

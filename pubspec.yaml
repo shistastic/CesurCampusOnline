@@ -28,6 +28,9 @@ dependencies:
   http:
   another_flushbar:
   stripe_payment:
+  open_file:
+  android_external_storage:
+  permission_handler:
 
 flutter_icons:
   image_path: "assets/images/Cesur - Logo.png"

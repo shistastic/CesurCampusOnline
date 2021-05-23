@@ -1,11 +1,18 @@
+import 'dart:io';
+
+import 'package:android_external_storage/android_external_storage.dart';
 import 'package:cesurcampusonline/data/constants.dart';
+import 'package:cesurcampusonline/data/http_calls.dart';
 import 'package:cesurcampusonline/models/content_model.dart';
 import 'package:cesurcampusonline/models/user_model.dart';
 import 'package:cesurcampusonline/screens/module_payment.dart';
 import 'package:cesurcampusonline/widgets/appBar.dart';
 import 'package:cesurcampusonline/widgets/campus_drawer.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:open_file/open_file.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 
 class UserContent extends StatefulWidget {
@@ -20,6 +27,33 @@ class UserContent extends StatefulWidget {
 }
 
 class _UserContentState extends State<UserContent> {
+  Future<String> downloadFile(String url, String dir) async {
+    HttpClient httpClient = new HttpClient();
+    File file;
+    String filePath = '';
+    String myUrl = '';
+
+    try {
+      myUrl = url;
+      var request = await httpClient.getUrl(Uri.parse(myUrl));
+      var response = await request.close();
+      if (response.statusCode == 200) {
+        var bytes = await consolidateHttpClientResponseBytes(response);
+        filePath = '$dir/bla.pdf';
+        file = File(filePath);
+        await file.writeAsBytes(bytes);
+        await OpenFile.open(filePath);
+        print('file downloaded');
+      }
+      else
+        filePath = 'Error code: ' + response.statusCode.toString();
+    }
+    catch (ex) {
+      filePath = 'Can not fetch url';
+    }
+    return filePath;
+  }
+
   @override
   Widget _buildBody(){
     return Container(
@@ -102,6 +136,8 @@ class _UserContentState extends State<UserContent> {
                                     ),
                                   ),
                                   onPressed: ()  async {
+                                    await downloadFile('http://10.0.0.47:8000/showcontent/3', '/storage/emulated/0/Download/');
+                                    // await showContentPDF(widget.content.id!.toString());
 
                                   },
                                   child: Text('Descargar Tarea',
