@@ -174,11 +174,12 @@ class _LoginState extends State<Login> {
                                     email: jsonResponse['student'][0]['email'],
                                     fullName: jsonResponse['student'][0]['fullname'],
                                     dni: jsonResponse['student'][0]['dni'],
-                                    accountType: jsonResponse['student'][0]['acc_type'].toString()
+                                    accountType: jsonResponse['student'][0]['acc_type'].toString(),
+                                    courseId: jsonResponse['student'][0]['course_id']
                                 );
                                 await insertUser(user);
 
-                                if(user.accountType == '1'){
+                                if(user.courseId != -1){
                                   await Navigator.of(context).push(MaterialPageRoute(
                                       builder: (_) => StudentHome(user)));
                                 }

@@ -10,6 +10,7 @@ class User {
   String email;
   String dni;
   String accountType;
+  int courseId;
 
   User({
     this.id,
@@ -18,6 +19,7 @@ class User {
     required this.fullName,
     required this.dni,
     required this.accountType,
+    required this.courseId,
   });
 
   Map<String, dynamic> toMap() {
@@ -27,7 +29,8 @@ class User {
       'email': email,
       'fullName': fullName,
       'dni': dni,
-      'accountType': accountType
+      'accountType': accountType,
+      'courseId': courseId
     };
   }
 }

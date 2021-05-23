@@ -536,6 +536,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                                     await payCourse(widget.user.fullName, widget.user.email, paymentToken!.tokenId!,
                                       priceCents.toString());
                                     print('paid');
+                                    await updateUser(widget.user.id.toString(), widget.user.dni, widget.user.fullName, widget.user.email );
                                     await Navigator.of(context).push(MaterialPageRoute(
                                         builder: (_) => StudentHome(widget.user)));
                                   },

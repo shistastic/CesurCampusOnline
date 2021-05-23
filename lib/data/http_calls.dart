@@ -64,6 +64,17 @@ Future<String> showCourse(String id) async {
   return request.body;
 }
 
+Future<String> updateUser(String id, String dni, String fullname, String email) async {
+  Uri uri = Uri.http(ApiEndpoints.url, ApiEndpoints.updateUser);
+  print(uri);
+  var request = await http.post(
+    uri,
+    body: {'id': id, 'dni': dni, 'fullname': fullname, 'email': email},
+  );
+  print(request.body);
+  return request.body;
+}
+
 Future<String> showCoursesYear(String year) async {
   Uri uri = Uri.http(ApiEndpoints.url, ApiEndpoints.showCourseYear);
   print(uri);
