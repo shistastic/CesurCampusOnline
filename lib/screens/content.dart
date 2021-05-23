@@ -286,7 +286,7 @@ class _UserContentState extends State<UserContent> {
                                 padding: EdgeInsets.symmetric(vertical: 5),
                                 child: Container(
                                   width: 110,
-                                  child: Text('Enviado',
+                                  child: Text(widget.content.date_end!,
                                     style: TextStyle(
                                       color: CustomColors.darkGrey,
                                       fontWeight: FontWeight.bold,

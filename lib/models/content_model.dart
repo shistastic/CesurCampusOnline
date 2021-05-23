@@ -9,6 +9,7 @@ class Content {
   int? subject_id;
   String? subject_name;
   bool? state;
+  String? date_end;
 
   Content({
     this.id,
@@ -18,6 +19,7 @@ class Content {
     required this.subject_id,
     required this.subject_name,
     required this.state,
+    required this.date_end,
   });
 
   Map<String, dynamic> toMap() {
@@ -26,7 +28,8 @@ class Content {
       'content': content,
       'title': title,
       'subjectId': subject_id,
-      'subjectName': subject_name
+      'subjectName': subject_name,
+      'dateEnd': date_end
     };
   }
 }

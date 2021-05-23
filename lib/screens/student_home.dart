@@ -181,6 +181,7 @@ class _StudentHomeState extends State<StudentHome> {
                                                             subject_id: data['content'][index]['subject_id'],
                                                             subject_name: data['content'][index]['subject_name'],
                                                           state: data['content'][index]['state'],
+                                                          date_end: data['content'][index]['date_end'],
                                                         );
                                                         print(content.id);
                                                         print(content.content);
@@ -188,6 +189,7 @@ class _StudentHomeState extends State<StudentHome> {
                                                         print(content.subject_id);
                                                         print(content.subject_name);
                                                         print(content.state);
+                                                        print(content.date_end);
                                                         await Navigator.of(context).push(MaterialPageRoute(
                                                             builder: (_) => UserContent(widget.user, content)));
                                                       },
