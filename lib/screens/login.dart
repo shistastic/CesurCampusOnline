@@ -163,10 +163,11 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                             onPressed: ()  async {
+
                               var response = await userLogin(dni!, password!);
                               print('this is response: $response');
                               // await showAllCourses();
-                              if(true){
+                              if(response.startsWith('{')){
                                 Map<String, dynamic> jsonResponse = jsonDecode(response);
                                 print(jsonResponse['student'][0]['acc_type']);
                                 User user = User(
@@ -188,7 +189,7 @@ class _LoginState extends State<Login> {
                                       builder: (_) => ModulePayment(user)));
                                   // Navigator.pushReplacementNamed(context, '/modulePayment');
                                 }
-                              } else if( response == 'false'){
+                              } else {
                                   Flushbar(
                                     title: "Credenciales Incorrectas",
                                     message: "La combinación usuario/contraseña introducidos no es correcto.",

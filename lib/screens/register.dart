@@ -177,6 +177,7 @@ class _RegisterState extends State<Register> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 40),
                     child: TextFormField(
+                      obscureText: true,
                       onChanged: (value) {
                         password = value;
                       },

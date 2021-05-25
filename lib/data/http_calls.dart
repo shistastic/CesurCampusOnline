@@ -21,8 +21,9 @@ class ApiEndpoints {
   static const payCourse = 'paycourse/';
   static const addContent = 'addcontent/';
   static const updateUser = 'updateUser/';
-  static const addAssignment = 'addAssignment/';
+  static const addAssignment = 'addassignment/';
   static const showContentUnit = 'showcontentunit/';
+  static const showAssignmentId = 'showcontentAssign/';
 
 }
 
@@ -56,12 +57,12 @@ Future<String> addStudent(String fullName, String dni, String email, String pass
 }
 
 
-Future addAssignment(String title, content, String contentId) async {
-  Uri uri = Uri.http(ApiEndpoints.url, ApiEndpoints.addStudent);
+Future addAssignment(String title, String contentId) async {
+  Uri uri = Uri.http(ApiEndpoints.url, ApiEndpoints.addAssignment);
   print(uri);
   var request = await http.post(
     uri,
-    body: {'title': title, 'content': content, 'content_id': contentId},
+    body: {'title': title, 'content_id': contentId},
   );
   print(request.body);
   return request.body;
@@ -74,6 +75,17 @@ Future showContentUnit(String unit, String subjectId) async {
   var request = await http.post(
     uri,
     body: {'unit': unit, 'subject_name': subjectId},
+  );
+  print(request.body);
+  return request.body;
+}
+
+Future showAssignmentId(String id) async {
+  Uri uri = Uri.http(ApiEndpoints.url, ApiEndpoints.showAssignmentId);
+  print(uri);
+  var request = await http.post(
+    uri,
+    body: {'content_id': id},
   );
   print(request.body);
   return request.body;

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:android_external_storage/android_external_storage.dart';
@@ -14,6 +15,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:path/path.dart';
 
 
 class UserContent extends StatefulWidget {
@@ -63,11 +65,13 @@ class _UserContentState extends State<UserContent> {
 
     if(result != null) {
       File file = File(result.files.single.path!);
-      await addAssignment('blabla', file, widget.content.id.toString());
+      await addAssignment('blabla', widget.content.id.toString());
     } else {
 
     }
   }
+
+  bool isUpload = false;
 
 
   @override
@@ -221,7 +225,7 @@ class _UserContentState extends State<UserContent> {
                                 padding: EdgeInsets.symmetric(vertical: 5),
                                 child: Container(
                                   width: 110,
-                                  child: widget.content.state! ? Text('Entregado',
+                                  child: isUpload ? Text('Entregado',
                                     style: TextStyle(
                                       color: CustomColors.darkGrey,
                                       fontWeight: FontWeight.bold,
@@ -339,13 +343,38 @@ class _UserContentState extends State<UserContent> {
                                 padding: EdgeInsets.symmetric(vertical: 5),
                                 child: Container(
                                   width: 110,
-                                  child: Text(widget.content.content.toString(),
-                                    style: TextStyle(
-                                      color: CustomColors.darkGrey,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                    ),
-                                    textAlign: TextAlign.left,
+                                  child: FutureBuilder(
+                                    future: showAssignmentId(widget.content.id.toString()),
+                                    builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot){
+                                      if(!snapshot.hasData && snapshot.data == null){
+                                        return  Text('No Entregado',
+                                          style: TextStyle(
+                                            color: CustomColors.darkGrey,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                          ),
+                                          textAlign: TextAlign.left,
+                                        );
+                                      } else {
+                                        var n = jsonDecode(snapshot.data);
+                                        return  Text(n['content'][0]['title'].toString().replaceAll("('", "").replaceAll("',)", ""),
+                                          style: TextStyle(
+                                            color: CustomColors.darkGrey,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                          ),
+                                          textAlign: TextAlign.left,
+                                        );
+                                      }
+                                    }
+                                    // child: Text(widget.content.content.toString(),
+                                    //   style: TextStyle(
+                                    //     color: CustomColors.darkGrey,
+                                    //     fontWeight: FontWeight.bold,
+                                    //     fontSize: 18,
+                                    //   ),
+                                    //   textAlign: TextAlign.left,
+                                    // ),
                                   ),
                                 ),
                               ),
@@ -367,19 +396,24 @@ class _UserContentState extends State<UserContent> {
                                     ),
                                   ),
                                   onPressed: ()  async {
+                                    print(widget.content.id);
                                     FilePickerResult result = (await FilePicker.platform.pickFiles(
                                         type: FileType.custom,
                                         allowedExtensions: ['pdf']
                                     ))!;
 
                                     if(result != null) {
-                                      File file = File(result.files.single.path!);
-                                      print(file);
-                                      await addAssignment('blabla', file, widget.content.id.toString());
+                                      File file = File(result.files.single.name!);
+                                      print(file.toString());
+                                      String baseFile = basename(file.path);
+                                      await addAssignment(baseFile, widget.content.id.toString());
                                     } else {
 
                                     }
                                     print('file uploaded');
+                                    setState(() {
+                                      isUpload = true;
+                                    });
                                   },
                                   child: Text('Agregar Tarea',
                                     style: TextStyle(
