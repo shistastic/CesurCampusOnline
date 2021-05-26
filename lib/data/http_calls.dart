@@ -56,6 +56,17 @@ Future<String> addStudent(String fullName, String dni, String email, String pass
   return request.body;
 }
 
+Future<String> addContent(String title, String description, String subject_id, String teacher_id, String subject_name, String state) async {
+  Uri uri = Uri.http(ApiEndpoints.url, ApiEndpoints.addContent);
+  print(uri);
+  var request = await http.post(
+    uri,
+    body: {'title': title, 'description': description, 'subject_id': subject_id, 'teacher_id': teacher_id, 'subject_name': subject_name, 'state': state },
+  );
+  print(request.body);
+  return request.body;
+}
+
 
 Future addAssignment(String title, String contentId) async {
   Uri uri = Uri.http(ApiEndpoints.url, ApiEndpoints.addAssignment);

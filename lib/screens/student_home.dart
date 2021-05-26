@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:cesurcampusonline/data/constants.dart';
 import 'package:cesurcampusonline/models/content_model.dart';
 import 'package:cesurcampusonline/models/user_model.dart';
+import 'package:cesurcampusonline/screens/addAssign.dart';
 import 'package:cesurcampusonline/screens/module_payment.dart';
 import 'package:cesurcampusonline/screens/content.dart';
 import 'package:cesurcampusonline/screens/subject.dart';
@@ -215,6 +216,27 @@ class _StudentHomeState extends State<StudentHome> {
                                 }
                               }
                           ),
+
+                          widget.user.accountType != '0' ? ElevatedButton(
+                            onPressed: () async {
+                              await Navigator.of(context).push(MaterialPageRoute(
+                              builder: (_) => AddAssign(widget.user)));
+                              },
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(CustomColors.darkBlue,
+                              ),
+                            ),
+
+                            child: Text(
+                              'Añadir Tarea',
+                              style: TextStyle(
+                                color: Colors.white,
+                                letterSpacing: 1.2,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16.0,
+                              ),
+                            ),
+                          ) : Container(),
                           SizedBox(height: 15,),
                         ],
                       ),
@@ -288,6 +310,7 @@ class _StudentHomeState extends State<StudentHome> {
                                       );
                                     },
                                   );
+
                                 }
                               }
                           ),
