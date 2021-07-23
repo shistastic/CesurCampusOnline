@@ -5,6 +5,12 @@ import 'package:cesurcampusonline/data/http_calls.dart';
 import 'package:cesurcampusonline/models/user_model.dart';
 import 'package:cesurcampusonline/widgets/appBar.dart';
 import 'package:flutter/material.dart';
+import 'package:stripe_payment/stripe_payment.dart';
+
+import '../data/http_calls.dart';
+import '../data/http_calls.dart';
+import '../data/http_calls.dart';
+import 'student_home.dart';
 // import 'package:stripe_payment/stripe_payment.dart';
 
 class ModulePayment extends StatefulWidget {
@@ -24,11 +30,40 @@ class _ModulePaymentState extends State<ModulePayment> {
   int selectedModal = 0;
 
   double total = 0;
+  var data;
 
+  int? priceCents;
 
   //Fixme Create a Future builder with the showCourse construct
   var response;
   late Map<String, dynamic> jsonResponse;
+
+  // Credit Card Information
+  int expMonth = 00;
+  int expYear = 00;
+  String? cardNumber;
+  String? cvc;
+
+  String? coursePrice;
+  Color payButtonColor = Color(0xfffca3ce);
+
+
+  TextEditingController creditCardController = TextEditingController();
+  TextEditingController controller = TextEditingController();
+  TextEditingController dateController = TextEditingController();
+
+  Token? paymentToken;
+  // GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+
+  creditCard (int expMonth, int expYear, String numCard, String cvc){
+    final CreditCard testCard = CreditCard(
+        number: numCard,
+        expMonth: expMonth,
+        expYear: expYear,
+        cvc: cvc
+    );
+    return testCard;
+  }
 
   getCoursePrice() async {
     response = await showCourse('1');
@@ -37,11 +72,28 @@ class _ModulePaymentState extends State<ModulePayment> {
     return jsonResponse;
   }
 
+  getCourse(year) async {
+    response = await showCoursesYear(year);
+    data = jsonDecode(response);
+    print(data['course'].length);
+    return data;
+  }
+
+
+
   @override
   void initState() {
     super.initState();
 
+    StripePayment.setOptions(
+        StripeOptions(
+            publishableKey:"pk_test_51IaKKkGzLhkB9n77H5mZ8bP4jqoA8RooGeEi9b5uepOypbSdMyfECmV8zrzXvY0CkaTjjxc8JFLIh3aoWCNUjfnY00rCi52lCz",
+            merchantId: "Test",
+            androidPayMode: 'test'
+        ));
+
     getCoursePrice();
+    getCourse('2');
 
   }
 
@@ -107,54 +159,6 @@ class _ModulePaymentState extends State<ModulePayment> {
                           }, child: Text('Segundo'),
                         ),
                       ),
-                      SizedBox(height: 15,),
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 7),
-                        child: Text('Grado',
-                          style: TextStyle(
-                              color:  CustomColors.darkBlue,
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: double.maxFinite,
-                        height: 50,
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(selectedCourse == 1 ?
-                            Colors.redAccent : CustomColors.medBlue),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              selectedCourse = 1;
-                            });
-                          }, child: Text('Desarrollo de Aplicaciones Multiplataforma',
-                            style: TextStyle(
-                            ),
-                          textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 13,),
-                      Container(
-                        width: double.maxFinite,
-                        height: 50,
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(selectedCourse == 2 ?
-                            Colors.redAccent : CustomColors.medBlue),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              selectedCourse = 2;
-                            });
-                          }, child: Text('Desarrollo de Aplicaciones Web',
-                          textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
                       SizedBox(height: 20,),
                       Padding(
                         padding: EdgeInsets.only(bottom: 7),
@@ -199,6 +203,56 @@ class _ModulePaymentState extends State<ModulePayment> {
                           textAlign: TextAlign.center,),
                         ),
                       ),
+                      SizedBox(height: 20,),
+                      selectedYear != 0 ? Padding(
+                        padding: EdgeInsets.only(bottom: 7),
+                        child: Text('Grado',
+                          style: TextStyle(
+                              color:  CustomColors.darkBlue,
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ) : Container(),
+                      selectedYear != 0 ? FutureBuilder(
+                          future: getCourse(selectedYear.toString()),
+                          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                            if (!snapshot.hasData && snapshot.data == null || data['course'].length == 0) {
+                              return Container();
+                            } else {
+                              return ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: data['course'].length,
+                                itemBuilder: (BuildContext ctxt, int index) {
+                                  return Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 7),
+                                    child: Container(
+                                      width: double.maxFinite,
+                                      height: 50,
+                                      child: ElevatedButton(
+                                        style: ButtonStyle(
+                                          backgroundColor: MaterialStateProperty.all(selectedCourse == data['course'][index]['id'] ?
+                                          Colors.redAccent : CustomColors.medBlue),
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            selectedCourse = data['course'][index]['id'];
+                                          });
+                                          coursePrice = data['course'][index]['price'].toString();
+                                        },
+                                        child: Text(data['course'][index]['name'],
+                                          style: TextStyle(
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            }
+                          }
+                      ) : Container(),
                       selectedModal != 0 && selectedCourse != 0 && selectedYear != 0 ?
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
@@ -209,22 +263,23 @@ class _ModulePaymentState extends State<ModulePayment> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text('A Pagar:',
-                              style: TextStyle(
-                                color: CustomColors.darkBlue,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18
+                                style: TextStyle(
+                                    color: CustomColors.darkBlue,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18
                                 ),
                               ),
                               SizedBox(width: 10,),
-                              Text('€',
+                              Text('${jsonResponse['course'][0]['price']} €',
                                 style: TextStyle(
-                                    fontSize: 16
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ],
                           ),
                         ),
-                      ) : SizedBox(height: 15,),
+                      ) : Container(),
                       Divider(
                         color: Colors.white,
                         thickness: 3,
@@ -268,7 +323,8 @@ class _ModulePaymentState extends State<ModulePayment> {
                                       decimal: false,
                                     ),
                                     onChanged: (value){
-
+                                      cardNumber = value;
+                                      print(cardNumber);
                                     },
                                     decoration: InputDecoration(
                                       focusedBorder: OutlineInputBorder(
@@ -347,7 +403,8 @@ class _ModulePaymentState extends State<ModulePayment> {
                                       ),
                                       // controller: this.controller,
                                       onChanged: (value){
-                                        // cvc = value;
+                                        cvc = value;
+                                        print(cvc);
                                       },
                                       // validator: this.validator,
                                       obscureText: false,
@@ -397,45 +454,43 @@ class _ModulePaymentState extends State<ModulePayment> {
                                       ),
                                       keyboardType:
                                       TextInputType.numberWithOptions(signed: false, decimal: false),
-                                      // controller: dateController,
+                                      controller: dateController,
                                       // decoration: widget.decoration,
                                       onChanged: (value) {
                                         setState(() {
                                           value = value.replaceAll(RegExp(r"\D"), "");
                                           switch (value.length) {
                                             case 0:
-                                              // dateController.text = "MM/YY";
-                                              // dateController.selection = TextSelection.collapsed(offset: 0);
+                                              dateController.text = "MM/YY";
+                                              dateController.selection = TextSelection.collapsed(offset: 0);
                                               break;
                                             case 1:
-                                              // dateController.text = "${value}M/YY";
-                                              // dateController.selection = TextSelection.collapsed(offset: 1);
+                                              dateController.text = "${value}M/YY";
+                                              dateController.selection = TextSelection.collapsed(offset: 1);
                                               break;
                                             case 2:
-                                              // dateController.text = "$value/YY";
-                                              // dateController.selection = TextSelection.collapsed(offset: 2);
-                                              // expMonth = int.parse(value.substring(0,2));
-                                              // print(expMonth);
+                                              dateController.text = "$value/YY";
+                                              dateController.selection = TextSelection.collapsed(offset: 2);
+                                              expMonth = int.parse(value.substring(0,2));
+                                              print(expMonth);
                                               break;
                                             case 3:
-                                              // dateController.text =
-                                              // "${value.substring(0, 2)}/${value.substring(2)}Y";
-                                              // dateController.selection = TextSelection.collapsed(offset: 4);
+                                              dateController.text =
+                                              "${value.substring(0, 2)}/${value.substring(2)}Y";
+                                              dateController.selection = TextSelection.collapsed(offset: 4);
                                               break;
                                             case 4:
-                                              // dateController.text =
-                                              // "${value.substring(0, 2)}/${value.substring(2, 4)}";
-                                              // dateController.selection = TextSelection.collapsed(offset: 5);
-                                              // expYear = int.parse(value.substring(2,4));
-                                              // print(expYear);
-
+                                              dateController.text =
+                                              "${value.substring(0, 2)}/${value.substring(2, 4)}";
+                                              dateController.selection = TextSelection.collapsed(offset: 5);
+                                              expYear = int.parse(value.substring(2,4));
+                                              print(expYear);
                                               break;
                                           }
                                           if (value.length > 4) {
-                                            // dateController.text =
-                                            // "${value.substring(0, 2)}/${value.substring(2, 4)}";
-                                            // dateController.selection = TextSelection.collapsed(offset: 5);
-
+                                            dateController.text =
+                                            "${value.substring(0, 2)}/${value.substring(2, 4)}";
+                                            dateController.selection = TextSelection.collapsed(offset: 5);
                                           }
                                         });
                                       },
@@ -449,7 +504,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                             ),
                             SizedBox(height: 10,),
                             selectedModal != 0 && selectedCourse != 0 && selectedYear != 0 ?
-                            Text('Total: $total€',
+                            Text('Total: ${jsonResponse['course'][0]['price']} €',
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 18,
@@ -458,7 +513,7 @@ class _ModulePaymentState extends State<ModulePayment> {
                               textAlign: TextAlign.center,
                             ) : SizedBox(height: 0,),
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0.0, 0, 7.0),
+                              padding: const EdgeInsets.fromLTRB(0, 7.0, 0, 7.0),
                               child: Center(
                                 child: ElevatedButton(
                                   style: ButtonStyle(
@@ -466,10 +521,26 @@ class _ModulePaymentState extends State<ModulePayment> {
                                     CustomColors.medBlue : Color(0xfffca3ce)),
                                   ),
                                   onPressed: () async {
-                                    Navigator.pushReplacementNamed(context, '/studentHome');
+                                    await StripePayment.createTokenWithCard(
+                                      creditCard(expMonth, expYear, cardNumber!, cvc!),
+                                    ).then((token) {
+                                      // _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text('Received ${token.tokenId}')));
+                                      setState(() {
+                                        paymentToken = token;
+                                        print(paymentToken!.tokenId);
+                                      });
+                                    });
+
+                                    print('Paying in process...');
+                                    priceCents = int.parse(coursePrice!) * 100;
+                                    await payCourse(widget.user.fullName, widget.user.email, paymentToken!.tokenId!,
+                                      priceCents.toString());
+                                    print('paid');
+                                    await updateUser(widget.user.id.toString(), widget.user.dni, widget.user.fullName, widget.user.email );
+                                    await Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (_) => StudentHome(widget.user)));
                                   },
-                                  child: Text(
-                                    false ? 'Procesando...' : 'Pagar con Tarjeta',
+                                  child: Text('Pagar con Tarjeta',
                                     style: TextStyle(
                                       color: Colors.white,
                                       letterSpacing: 1.2,

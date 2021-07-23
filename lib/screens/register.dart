@@ -93,7 +93,7 @@ class _RegisterState extends State<Register> {
                         contentPadding: EdgeInsets.only(top: 20),
                         isDense: true,
                         hintText: 'Email',
-                        prefixIcon: Icon(Icons.account_circle,
+                        prefixIcon: Icon(Icons.email,
                           color:  CustomColors.darkBlue,
                         ),
                       ),
@@ -177,6 +177,7 @@ class _RegisterState extends State<Register> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 40),
                     child: TextFormField(
+                      obscureText: true,
                       onChanged: (value) {
                         password = value;
                       },
@@ -204,7 +205,7 @@ class _RegisterState extends State<Register> {
                         contentPadding: EdgeInsets.only(top: 20),
                         isDense: true,
                         hintText: 'Contraseña',
-                        prefixIcon: Icon(Icons.account_circle,
+                        prefixIcon: Icon(Icons.lock,
                           color:  CustomColors.darkBlue,
                         ),
                       ),

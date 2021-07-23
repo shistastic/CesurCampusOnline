@@ -1,10 +1,17 @@
 import 'package:cesurcampusonline/data/constants.dart';
+import 'package:cesurcampusonline/models/user_model.dart';
 import 'package:cesurcampusonline/screens/content.dart';
+import 'package:cesurcampusonline/screens/profile.dart';
 import 'package:cesurcampusonline/screens/student_home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CampusDrawer extends StatelessWidget {
+
+  User user;
+
+  CampusDrawer(this.user);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -27,8 +34,9 @@ class CampusDrawer extends StatelessWidget {
                       color: Colors.black,
                       ),
                       title: Text('Mi Perfil'),
-                      onTap: (){
-
+                      onTap: () async {
+                        await Navigator.of(context).push(MaterialPageRoute(
+                            builder: (_) => MyProfile(user)));
                       }
                   ),
                   ListTile(
@@ -38,16 +46,7 @@ class CampusDrawer extends StatelessWidget {
                       title: Text('General'),
                       onTap: () async {
                         await Navigator.of(context).push(MaterialPageRoute(
-                            builder: (_) => StudentHome()));
-                      }
-                  ),
-                  ListTile(
-                    leading: Icon(Icons.question_answer,
-                      color: Colors.black,
-                    ),
-                      title: Text('Chat'),
-                      onTap: (){
-
+                            builder: (_) => StudentHome(user)));
                       }
                   ),
                 ],

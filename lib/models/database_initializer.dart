@@ -7,7 +7,7 @@ getDataBase() async {
     onCreate: (db, version) {
 
       db.execute(
-          "CREATE TABLE user(id INTEGER PRIMARY KEY, userId INTEGER, fullname TEXT, dni TEXT, email TEXT)");
+          "CREATE TABLE user(id INTEGER PRIMARY KEY, userId INTEGER, fullname TEXT, dni TEXT, email TEXT, accountType TEXT, courseId INTEGER)");
       },
 
     version: 1,
