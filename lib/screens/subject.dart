@@ -208,7 +208,7 @@ class _SubjectInfoState extends State<SubjectInfo> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 30, horizontal: 35),
+            padding: EdgeInsets.symmetric(vertical: 35, horizontal: 35),
             child: Container(
               decoration: BoxDecoration(
                 color: CustomColors.bgLightBlue,
